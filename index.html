@@ -2,11 +2,951 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Memoria by StellaDear</title>
-<meta http-equiv="refresh" content="0; url=https://indecisive-helicona-37f.notion.site/Memoria-by-StellaDear-c47190032d1641f5bf17200316a0a67e">
-<link rel="canonical" href="https://indecisive-helicona-37f.notion.site/Memoria-by-StellaDear-c47190032d1641f5bf17200316a0a67e">
+<meta name="description" content="今日のことを、誰かに覚えていてもらえる。ひとことを灯りに変えて残す、静かな日記アプリ Memoria。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ====================================================================
+   Memoria LP
+   組み方はBOTANIST（botanistofficial.com）のCSSに準拠。
+   - ルートfont-sizeがビューポート比（1rem = 設計10px）
+   - スクロール量を --progress として受け、blur/opacity/幅に流し込む
+   - ホバーは .2s ease、かつ hover:hover の環境だけ
+   世界観の演出（息づく背景・光の粒・微動）は #828 の朔案。
+   ==================================================================== */
+
+*{
+  /* ---- 色（アプリ本体 app_theme.dart と同値） ---- */
+  --color-night:#0C1524;
+  --color-night-mid:#12213A;
+  --color-night-deep:#1B355A;
+  --color-lamp:#F29441;
+  --color-lamp-core:#FCEBBA;
+  --color-lamp-edge:#E6793D;
+  --color-ember:#D95D39;
+  --color-paper:#FFF8E8;
+  --color-gray:#94A3B8;
+
+  /* ---- 余白 ---- */
+  --side-padding:14rem;
+
+  /* ---- イージング（BOTANISTが使っている値） ---- */
+  --ease-in-out:cubic-bezier(.65,0,.35,1);
+  --ease-out:cubic-bezier(.33,1,.68,1);
+  --ease-out-soft:cubic-bezier(.5,1,.89,1);
+
+  /* ---- 書体 ---- */
+  --serif:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif;
+  --sans:"Zen Kaku Gothic New","Yu Gothic","YuGothic","Hiragino Sans","Noto Sans JP",sans-serif;
+}
+
+@media screen and (max-width:768px),(orientation:portrait) and (hover:none){
+  *{ --side-padding:2.4rem; }
+}
+
+*,*::before,*::after{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  background-repeat:no-repeat;
+}
+
+/* 1rem = 10px（PCは1366px設計 / SPは375px設計）。
+   ただしBOTANIST完全準拠だと1024px前後で本文が11px近くまで落ちるので、
+   PC側にだけ 9px の下限を入れてある（意図的な差分）。 */
+html{
+  font-size:max(.7320644217vw, 9px);
+  overflow-x:hidden;
+  background:var(--color-night);
+  color:var(--color-paper);
+  font-family:var(--sans);
+  text-spacing-trim:space-all;
+  scroll-padding-top:8rem;
+}
+@media screen and (max-width:768px),(orientation:portrait) and (hover:none){
+  html{ font-size:2.6666666667vw; }
+}
+
+html,body{ overscroll-behavior-y:contain; }
+
+body{ -webkit-font-smoothing:antialiased; }
+
+a{ text-decoration:none; color:inherit; }
+ul,ol{ list-style:none; }
+h1,h2,h3{ font-size:inherit; font-weight:inherit; }
+img{ vertical-align:bottom; }
+
+*::selection{ color:var(--color-night); background:var(--color-lamp-core); }
+*:focus-visible{ box-shadow:inset 0 0 0 1px currentColor !important; }
+
+/* ====================================================================
+   スクロール連動の共通パーツ
+   --progress は 0 → 1 でJSから流れてくる
+   ==================================================================== */
+
+/* 演出④：インクが染み込むように浮かび上がる。
+   blur が解けながら滲み出す。移動は二乗で減衰させて最後をぬるっと止める。 */
+.bleed{
+  --progress:0;
+  filter:blur(calc(10px * (1 - var(--progress))));
+  opacity:var(--progress);
+  translate:0 calc(4rem * (1 - var(--progress)) * (1 - var(--progress)));
+}
+
+/* 伸びる1pxのヘアライン */
+.rule{
+  --progress:0;
+  display:block;
+  margin-inline:auto;
+  width:1px;
+  height:calc(9rem * var(--progress));
+  background:linear-gradient(180deg,rgba(252,235,186,.45),rgba(252,235,186,0));
+}
+.rule.wide{
+  width:calc(100% * var(--progress));
+  height:1px;
+  margin-inline:0;
+  background:linear-gradient(90deg,rgba(148,163,184,.28),rgba(148,163,184,0));
+}
+
+/* 斜めのマスクで拭き取るように出す（border-line-image と同じ手法） */
+.wipe{
+  --progress:0;
+  -webkit-mask:linear-gradient(135deg,#000 calc(-300% + 600% * var(--progress)),transparent calc(600% * var(--progress)));
+  mask:linear-gradient(135deg,#000 calc(-300% + 600% * var(--progress)),transparent calc(600% * var(--progress)));
+  opacity:var(--progress);
+}
+
+/* ====================================================================
+   タイポグラフィ
+   見出しは行間を詰めて字間を少し開ける／本文は行間2・字間.05em
+   ==================================================================== */
+
+.eyebrow{
+  font-family:var(--serif);
+  font-size:1.2rem;
+  line-height:1.6;
+  letter-spacing:.22em;
+  text-indent:.22em;
+  text-transform:uppercase;
+  color:var(--color-lamp-core);
+  opacity:.7;
+}
+
+h2{
+  font-family:var(--serif);
+  font-size:2.8rem;
+  line-height:1.9;
+  letter-spacing:.08em;
+  font-weight:400;
+  text-wrap:balance;
+}
+
+.lead{
+  font-size:1.5rem;
+  line-height:2;
+  letter-spacing:.05em;
+  color:var(--color-gray);
+}
+.lead + .lead{ margin-top:5rem; }
+
+/* ====================================================================
+   FV
+   ==================================================================== */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:center;
+  text-align:center;
+  padding:var(--side-padding) 2.4rem 0;
+  background-image:url("assets/images/fv_sp.webp");
+  background-size:cover;
+  background-position:center;
+}
+@media screen and (min-width:769px) and ((orientation:landscape) or (hover:hover)){
+  .hero{
+    background-image:url("assets/images/fv_pc.webp");
+    background-position:center 40%;
+  }
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(6,10,18,.15) 0%,rgba(6,10,18,0) 30%,rgba(6,10,18,.55) 100%);
+  pointer-events:none;
+}
+
+/* 演出①：部屋そのものが静かに息をしている */
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(50rem 34rem at 62% 62%,rgba(242,148,65,.1),transparent 70%);
+  animation:breathe 8s var(--ease-in-out) infinite alternate;
+}
+
+/* スクロールで写真の左右に夜色の枠が閉じてくる（home-fv-out と同じ役割）。
+   全面の写真から、余白のある本文レイアウトへの繋ぎ目。 */
+.fv-frame{
+  --progress:0;
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+}
+.fv-frame::before,
+.fv-frame::after{
+  content:"";
+  position:absolute;
+  top:0;
+  height:100%;
+  width:calc(var(--side-padding) * var(--progress));
+  background:var(--color-night);
+}
+.fv-frame::before{ left:0; }
+.fv-frame::after{ right:0; }
+
+.hero-copy{
+  position:relative;
+  z-index:2;
+  padding-bottom:min(9vh,6rem);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+h1{
+  margin-top:2.4rem;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:4rem;
+  line-height:1.75;
+  letter-spacing:.1em;
+  text-wrap:balance;
+  text-shadow:0 0 .8rem color-mix(in srgb,#000,transparent 50%);
+}
+
+.hero-sub{
+  margin-top:3rem;
+  font-size:1.5rem;
+  line-height:2;
+  letter-spacing:.05em;
+  opacity:.75;
+  text-shadow:0 0 .8rem color-mix(in srgb,#000,transparent 40%);
+}
+
+.scrollcue{
+  margin-top:5rem;
+  position:relative;
+  width:1px;
+  height:3.2rem;
+  background:linear-gradient(180deg,rgba(252,235,186,.5),transparent);
+}
+.scrollcue::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  width:4px;
+  height:4px;
+  margin-left:-2px;
+  border-radius:50%;
+  background:var(--color-lamp-core);
+  filter:blur(.5px);
+  animation:cue 4.5s var(--ease-in-out) infinite;
+}
+@keyframes cue{
+  0%{ translate:0 0; opacity:0; }
+  20%{ opacity:.9; }
+  75%{ translate:0 2.8rem; opacity:0; }
+  100%{ translate:0 2.8rem; opacity:0; }
+}
+
+/* ====================================================================
+   セクション共通
+   ==================================================================== */
+
+.section{
+  position:relative;
+  overflow:hidden;
+  padding-block:15rem;
+  padding-inline:var(--side-padding);
+}
+
+.narrow{
+  margin-inline:auto;
+  max-width:52rem;
+  text-align:center;
+}
+
+/* 演出①：背景がゆっくり息づく */
+.breath{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(45rem 30rem at 50% 45%,rgba(242,148,65,.13),transparent 68%);
+  animation:breathe 7.5s var(--ease-in-out) infinite alternate;
+}
+@keyframes breathe{
+  from{ opacity:.5; scale:1; }
+  to{ opacity:1; scale:1.05; }
+}
+
+/* 演出③：光の微粒子。1セクションに2粒まで */
+.mote{
+  position:absolute;
+  bottom:-3rem;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:var(--color-lamp-core);
+  filter:blur(2px);
+  opacity:0;
+  pointer-events:none;
+  animation:drift 26s var(--ease-in-out) infinite;
+}
+.mote.m2{ width:4px; height:4px; animation-duration:32s; animation-delay:-11s; }
+.mote.m3{ width:6px; height:6px; animation-duration:29s; animation-delay:-20s; }
+@keyframes drift{
+  0%{ translate:0 0; opacity:0; }
+  15%{ opacity:.5; }
+  55%{ opacity:.28; }
+  80%{ opacity:.12; }
+  100%{ translate:2.5rem -70vh; opacity:0; }
+}
+
+/* ====================================================================
+   世界観
+   ==================================================================== */
+
+.world{ background:linear-gradient(180deg,var(--color-night) 0%,var(--color-night-mid) 100%); }
+.world h2{ margin-top:3rem; }
+.world .lead{ margin-top:5rem; }
+.world .rule{ margin-top:8rem; }
+
+/* ====================================================================
+   機能紹介
+   ==================================================================== */
+
+.features{ background:linear-gradient(180deg,var(--color-night-mid) 0%,var(--color-night-deep) 100%); }
+
+.features-head{ text-align:center; }
+.features-head h2{ margin-top:3rem; }
+
+.feature-list{ margin-top:15rem; }
+.feature + .feature{ margin-top:18rem; }
+
+.feature{
+  display:grid;
+  gap:6rem;
+  align-items:center;
+}
+@media screen and (min-width:769px) and ((orientation:landscape) or (hover:hover)){
+  .feature{
+    grid-template-columns:1fr 1fr;
+    gap:10rem;
+  }
+  .feature:nth-child(even) .feature-visual{ order:2; }
+}
+
+.feature-num{
+  display:block;
+  font-family:var(--serif);
+  font-size:1.2rem;
+  line-height:1;
+  letter-spacing:.3em;
+  color:var(--color-lamp);
+  opacity:.7;
+}
+.feature-body h3{
+  margin-top:2.4rem;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:2rem;
+  line-height:1.8;
+  letter-spacing:.08em;
+}
+.feature-body p{
+  margin-top:3rem;
+  font-size:1.4rem;
+  line-height:2;
+  letter-spacing:.05em;
+  color:var(--color-gray);
+}
+.feature-body .rule.wide{ margin-top:4rem; }
+
+/* 演出⑤：静止させない。ごくわずかに揺れ続ける（りん指定・最重要） */
+.feature-visual{ animation:idlefloat 9s var(--ease-in-out) infinite alternate; }
+.feature:nth-child(2) .feature-visual{ animation-duration:11s; animation-delay:-3s; }
+.feature:nth-child(3) .feature-visual{ animation-duration:10s; animation-delay:-6s; }
+@keyframes idlefloat{
+  from{ translate:0 -.5rem; }
+  to{ translate:0 .5rem; }
+}
+
+/* ---- スマホモックアップ（CSSのみ・実スクショ差し替え前提の仮） ---- */
+.phone{
+  position:relative;
+  margin-inline:auto;
+  width:24rem;
+  aspect-ratio:9/18.5;
+  border-radius:3.4rem;
+  padding:.7rem;
+  background:linear-gradient(160deg,rgba(148,163,184,.16),rgba(12,21,36,.5));
+  box-shadow:0 3rem 6rem color-mix(in srgb,#000,transparent 60%),inset 0 0 0 1px rgba(252,235,186,.1);
+}
+.phone::after{
+  content:"";
+  position:absolute;
+  top:1.6rem;
+  left:50%;
+  translate:-50% 0;
+  width:4.4rem;
+  height:.4rem;
+  border-radius:100vmax;
+  background:rgba(252,235,186,.14);
+}
+.phone-screen{
+  height:100%;
+  border-radius:2.8rem;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:2rem;
+  gap:1rem;
+  background:linear-gradient(180deg,#0A1220 0%,#16294A 100%);
+}
+
+.lamp-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.6rem;
+  padding-bottom:1.2rem;
+}
+.lamp{
+  position:relative;
+  aspect-ratio:1;
+  border-radius:50%;
+  background:radial-gradient(circle at 50% 45%,var(--color-lamp-core) 0%,var(--color-lamp) 40%,rgba(217,93,57,0) 72%);
+  animation:flicker 9s var(--ease-in-out) infinite alternate;
+}
+.lamp:nth-child(2){ animation-duration:11s; animation-delay:-2.5s; }
+.lamp:nth-child(3){ animation-duration:8s; animation-delay:-5s; }
+.lamp:nth-child(4){ animation-duration:12s; animation-delay:-7s; }
+.lamp:nth-child(5){ animation-duration:10s; animation-delay:-1.5s; }
+.lamp.is-off{
+  background:radial-gradient(circle at 50% 45%,rgba(148,163,184,.18) 0%,rgba(148,163,184,0) 66%);
+  animation:none;
+}
+@keyframes flicker{
+  from{ opacity:.62; }
+  to{ opacity:1; }
+}
+
+/* 1つの灯りだけ、波紋がゆっくり広がって消える（beacon と同じ作り） */
+.lamp.is-beacon::before,
+.lamp.is-beacon::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:var(--color-lamp);
+  opacity:0;
+  animation:beacon 6s var(--ease-out) infinite;
+}
+.lamp.is-beacon::after{
+  animation-delay:.6s;
+  animation-timing-function:var(--ease-out-soft);
+}
+@keyframes beacon{
+  0%{ scale:0; opacity:.25; }
+  70%{ scale:2.6; opacity:0; }
+  100%{ opacity:0; }
+}
+
+.letter{
+  border-radius:.6rem;
+  padding:1.4rem 1.2rem;
+  display:grid;
+  gap:.8rem;
+  background:rgba(255,248,232,.92);
+  box-shadow:0 1.2rem 2.6rem color-mix(in srgb,#000,transparent 70%);
+}
+.letter span{
+  display:block;
+  height:.4rem;
+  border-radius:100vmax;
+  background:rgba(12,21,36,.2);
+}
+.letter span:nth-child(1){ width:45%; background:rgba(242,148,65,.5); }
+.letter span:nth-child(3){ width:82%; }
+.letter span:nth-child(4){ width:60%; }
+
+.album{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1rem;
+}
+.album i{
+  display:block;
+  aspect-ratio:1;
+  border-radius:.4rem;
+  background:linear-gradient(150deg,rgba(242,148,65,.3),rgba(27,53,90,.6));
+  box-shadow:inset 0 0 2.4rem rgba(252,235,186,.14);
+}
+.album i:nth-child(2){ background:linear-gradient(150deg,rgba(230,121,61,.26),rgba(12,21,36,.72)); }
+.album i:nth-child(3){ background:linear-gradient(150deg,rgba(252,235,186,.2),rgba(27,53,90,.66)); }
+
+.phone-caption{
+  margin-top:2.4rem;
+  text-align:center;
+  font-size:1.1rem;
+  line-height:1.6;
+  letter-spacing:.14em;
+  color:var(--color-gray);
+  opacity:.45;
+}
+
+/* ====================================================================
+   CTA
+   ==================================================================== */
+
+.cta{ background:var(--color-night-deep); }
+.cta h2{ margin-top:3rem; }
+.cta .lead{ margin-top:4rem; }
+
+.store-row{
+  margin-top:6rem;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:2rem;
+}
+
+/* 演出②：カチッと光らせず、灯火がふんわり広がる。
+   ただし持続時間はBOTANIST側に寄せて .45s（ホバーは反応が鈍いと安っぽくなる）。
+   ホバーできる環境でだけ効かせる。 */
+.store-btn{
+  position:relative;
+  z-index:0;
+  overflow:hidden;
+  min-width:22rem;
+  padding:1.8rem 2.8rem;
+  border:1px solid rgba(252,235,186,.2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:1.4rem;
+  color:var(--color-paper);
+  opacity:.5;
+  cursor:default;
+}
+.store-btn::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  background:radial-gradient(60% 120% at 50% 100%,rgba(242,148,65,.3),transparent 70%);
+  opacity:0;
+}
+a.store-btn{ opacity:1; cursor:pointer; }
+
+@media (hover:hover) and (pointer:fine){
+  a.store-btn{
+    transition-duration:.45s;
+    transition-timing-function:ease;
+    transition-property:border-color;
+  }
+  a.store-btn::before{
+    transition-duration:.45s;
+    transition-timing-function:ease;
+    transition-property:opacity;
+  }
+  a.store-btn:hover{ border-color:rgba(252,235,186,.45); }
+  a.store-btn:hover::before{ opacity:1; }
+}
+
+.store-btn svg{
+  width:2rem;
+  height:2rem;
+  fill:currentColor;
+  flex:none;
+  opacity:.8;
+}
+.store-btn small{
+  display:block;
+  font-size:1rem;
+  line-height:1;
+  letter-spacing:.24em;
+  color:var(--color-lamp);
+}
+.store-btn b{
+  display:block;
+  margin-top:.6rem;
+  font-weight:400;
+  font-size:1.4rem;
+  line-height:1;
+  letter-spacing:.06em;
+}
+
+.cta-note{
+  margin-top:5rem;
+  font-size:1.2rem;
+  line-height:1.6;
+  letter-spacing:.14em;
+  color:var(--color-gray);
+  opacity:.6;
+}
+
+/* ====================================================================
+   フッター
+   ==================================================================== */
+
+footer{
+  padding-block:10rem 6rem;
+  padding-inline:var(--side-padding);
+  text-align:center;
+  background:var(--color-night);
+  border-top:1px solid rgba(148,163,184,.1);
+}
+
+.footer-brand{
+  font-family:var(--serif);
+  font-size:1.3rem;
+  line-height:1;
+  letter-spacing:.4em;
+  text-indent:.4em;
+  color:var(--color-lamp-core);
+  opacity:.7;
+}
+
+.footer-links{
+  margin-top:5rem;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:1.6rem 4rem;
+}
+.footer-links a{
+  position:relative;
+  padding-bottom:.6rem;
+  font-size:1.3rem;
+  line-height:1.6;
+  letter-spacing:.08em;
+  color:var(--color-gray);
+}
+/* 下線は左から右へ引かれ、ホバーを外すと右へ抜けていく */
+.footer-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:1px;
+  background:currentColor;
+  opacity:.5;
+  transform-origin:right center;
+  scale:0 1;
+}
+@media (hover:hover) and (pointer:fine){
+  .footer-links a{
+    transition-duration:.2s;
+    transition-timing-function:ease;
+    transition-property:color;
+  }
+  .footer-links a::after{
+    transition-duration:.4s;
+    transition-timing-function:var(--ease-out);
+    transition-property:scale;
+  }
+  .footer-links a:hover{ color:var(--color-paper); }
+  .footer-links a:hover::after{
+    transform-origin:left center;
+    scale:1 1;
+  }
+}
+
+.copyright{
+  margin-top:6rem;
+  font-size:1.1rem;
+  line-height:1.6;
+  letter-spacing:.2em;
+  color:var(--color-gray);
+  opacity:.4;
+}
+
+/* ====================================================================
+   SP
+   ==================================================================== */
+
+@media screen and (max-width:768px),(orientation:portrait) and (hover:none){
+  .section{ padding-block:11rem; }
+  h1{ font-size:3rem; line-height:1.75; }
+  .hero-sub{ margin-top:2.4rem; font-size:1.4rem; }
+  h2{ font-size:2.2rem; line-height:1.9; }
+  .lead{ font-size:1.4rem; }
+  .lead + .lead{ margin-top:4rem; }
+  .features .feature-list{ margin-top:8rem; }
+  .feature + .feature{ margin-top:11rem; }
+  .feature{ gap:5rem; }
+  .feature-body h3{ font-size:1.8rem; }
+  .phone{ width:22rem; }
+  .store-btn{ min-width:26rem; }
+  footer{ padding-block:8rem 5rem; }
+}
+
+/* ====================================================================
+   動きを減らす設定では、全部止める
+   ==================================================================== */
+
+@media (prefers-reduced-motion:reduce){
+  .hero::after,
+  .breath,
+  .scrollcue::after,
+  .lamp,
+  .lamp.is-beacon::before,
+  .lamp.is-beacon::after,
+  .feature-visual{ animation:none; }
+  .mote{ display:none; }
+  .bleed,.rule,.wipe,.fv-frame{ --progress:1 !important; }
+  .bleed{ filter:none; translate:none; }
+  .wipe{ -webkit-mask:none; mask:none; }
+}
+</style>
 </head>
 <body>
-<p>Memoria by StellaDear のページへ移動します。移動しない場合は<a href="https://indecisive-helicona-37f.notion.site/Memoria-by-StellaDear-c47190032d1641f5bf17200316a0a67e">こちら</a>をクリックしてください。</p>
+
+<!-- FV。コピー・画像は承認済み -->
+<section class="hero">
+  <div class="fv-frame" data-p="scroll"></div>
+  <div class="hero-copy">
+    <p class="eyebrow bleed" data-p>Memoria</p>
+    <h1 class="bleed" data-p data-shift=".05">今日のことを、<br>誰かに覚えていてもらえる。</h1>
+    <p class="hero-sub bleed" data-p data-shift=".1">灯りが、ひとつ、ふたつ。<br>今日も、部屋があたたかい。</p>
+    <div class="scrollcue"></div>
+  </div>
+</section>
+
+<!-- 世界観。コピーは仮 -->
+<section class="section world">
+  <div class="breath"></div>
+  <span class="mote" style="left:18%"></span>
+  <span class="mote m2" style="left:74%"></span>
+
+  <div class="narrow">
+    <p class="eyebrow bleed" data-p>A quiet room</p>
+    <h2 class="bleed" data-p data-shift=".05">大きな出来事じゃなくていい。</h2>
+    <p class="lead bleed" data-p data-shift=".1">
+      うれしかったこと、しんどかったこと、<br>
+      なんでもない一日のこと。<br>
+      書き残したひとことは、この部屋の灯りになります。
+    </p>
+    <p class="lead bleed" data-p data-shift=".14">
+      誰かに見せるための記録ではなく、<br>
+      あなたの毎日をそっと覚えているための場所です。
+    </p>
+    <span class="rule" data-p></span>
+  </div>
+</section>
+
+<!-- 機能紹介。3機能の内容・スマホ画面はいずれも仮（実スクショに差し替え前提） -->
+<section class="section features">
+  <span class="mote m3" style="left:8%"></span>
+  <span class="mote m2" style="left:88%"></span>
+
+  <div class="features-head">
+    <p class="eyebrow bleed" data-p>Features</p>
+    <h2 class="bleed" data-p data-shift=".05">Memoriaでできること</h2>
+  </div>
+
+  <div class="feature-list">
+
+    <article class="feature">
+      <div class="feature-visual">
+        <div class="wipe" data-p>
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="lamp-grid">
+                <div class="lamp is-beacon"></div>
+                <div class="lamp"></div>
+                <div class="lamp"></div>
+                <div class="lamp"></div>
+                <div class="lamp"></div>
+                <div class="lamp is-off"></div>
+              </div>
+            </div>
+          </div>
+          <p class="phone-caption">画面はイメージです</p>
+        </div>
+      </div>
+      <div class="feature-body">
+        <span class="feature-num bleed" data-p>01</span>
+        <h3 class="bleed" data-p data-shift=".04">ひとことが、灯りになる</h3>
+        <p class="bleed" data-p data-shift=".08">
+          今日のことを短く書き残すだけ。<br>
+          言葉は部屋の灯りに変わって、日が暮れるたび静かにともります。長い文章も、続ける気合いもいりません。
+        </p>
+        <span class="rule wide" data-p data-shift=".12"></span>
+      </div>
+    </article>
+
+    <article class="feature">
+      <div class="feature-visual">
+        <div class="wipe" data-p>
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="letter"><span></span><span></span><span></span><span></span></div>
+              <div class="letter"><span></span><span></span><span></span><span></span></div>
+            </div>
+          </div>
+          <p class="phone-caption">画面はイメージです</p>
+        </div>
+      </div>
+      <div class="feature-body">
+        <span class="feature-num bleed" data-p>02</span>
+        <h3 class="bleed" data-p data-shift=".04">手紙が、返ってくる</h3>
+        <p class="bleed" data-p data-shift=".08">
+          書いた日々を受けとって、あなたに宛てた手紙が届きます。<br>
+          すぐに返事が来るわけではないぶん、待つ時間ごと、ここにいてもらえている感じがします。
+        </p>
+        <span class="rule wide" data-p data-shift=".12"></span>
+      </div>
+    </article>
+
+    <article class="feature">
+      <div class="feature-visual">
+        <div class="wipe" data-p>
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="album"><i></i><i></i><i></i><i></i></div>
+            </div>
+          </div>
+          <p class="phone-caption">画面はイメージです</p>
+        </div>
+      </div>
+      <div class="feature-body">
+        <span class="feature-num bleed" data-p>03</span>
+        <h3 class="bleed" data-p data-shift=".04">灯した日が、積み重なる</h3>
+        <p class="bleed" data-p data-shift=".08">
+          ともした灯りは、日付とともにアルバムに残ります。<br>
+          忘れてしまった夜のことも、あとからちゃんと見に来られます。
+        </p>
+        <span class="rule wide" data-p data-shift=".12"></span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- CTA。ストアURL未確定のため、リンクにはせず準備中表示のまま -->
+<section class="section cta">
+  <div class="breath"></div>
+  <span class="mote" style="left:30%"></span>
+  <span class="mote m3" style="left:66%"></span>
+
+  <div class="narrow">
+    <p class="eyebrow bleed" data-p>Download</p>
+    <h2 class="bleed" data-p data-shift=".05">今夜の灯りを、ひとつ。</h2>
+    <p class="lead bleed" data-p data-shift=".09">iOS / Android で配信予定です。</p>
+
+    <div class="store-row bleed" data-p data-shift=".13">
+      <span class="store-btn" aria-disabled="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.7c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.3.8-.7 0-1.7-.8-2.8-.8-1.5 0-2.8.8-3.5 2.1-1.5 2.6-.4 6.4 1.1 8.5.7 1 1.5 2.2 2.6 2.2 1 0 1.4-.7 2.7-.7s1.6.7 2.7.6c1.1 0 1.8-1 2.5-2 .8-1.2 1.1-2.3 1.1-2.3s-2.1-.8-2.1-3.3zM14.3 5.6c.6-.7 1-1.7.9-2.6-.9 0-1.9.6-2.5 1.3-.6.6-1 1.6-.9 2.5 1 .1 2-.5 2.5-1.2z"/></svg>
+        <span><small>COMING SOON</small><b>App Store</b></span>
+      </span>
+      <span class="store-btn" aria-disabled="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l.1.1 9.3-9.3v-.2L3.6 2.3zM16.5 15.4l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1 .6 1 1.6 0 2.2l-3.8 2zM15.7 16.2l-3.2-3.2-9.3 9.3c.3.4.9.4 1.5.1l11-6.2M15.7 7.8L4.7 1.6c-.6-.3-1.2-.3-1.5.1l9.3 9.3 3.2-3.2z"/></svg>
+        <span><small>COMING SOON</small><b>Google Play</b></span>
+      </span>
+    </div>
+
+    <p class="cta-note bleed" data-p data-shift=".17">配信開始までもう少しお待ちください。</p>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-brand">MEMORIA</p>
+  <ul class="footer-links">
+    <li><a href="https://indecisive-helicona-37f.notion.site/36ae8ceaad54803abcbbd408b5c421f9" target="_blank" rel="noopener">利用規約</a></li>
+    <li><a href="https://indecisive-helicona-37f.notion.site/36ae8ceaad54803e91b1c64bda518132" target="_blank" rel="noopener">プライバシーポリシー</a></li>
+    <li><a href="https://indecisive-helicona-37f.notion.site/36ae8ceaad548028ba85df03d50ce8ae" target="_blank" rel="noopener">特定商取引法に基づく表記</a></li>
+  </ul>
+  <p class="copyright">© StellaDear</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var items  = Array.prototype.slice.call(document.querySelectorAll("[data-p]"));
+
+  // 動きを減らす設定なら、最初から出し切って終わり
+  if (reduce){
+    items.forEach(function(el){ el.style.setProperty("--progress", 1); });
+    return;
+  }
+
+  var scrollDriven = [];
+  var itemDriven   = [];
+
+  items.forEach(function(el){
+    (el.getAttribute("data-p") === "scroll" ? scrollDriven : itemDriven).push({
+      el: el,
+      shift: parseFloat(el.getAttribute("data-shift") || 0)
+    });
+  });
+
+  var vh = window.innerHeight;
+  var ticking = false;
+
+  function clamp(v){ return v < 0 ? 0 : v > 1 ? 1 : v; }
+
+  function update(){
+    ticking = false;
+
+    // 要素の位置に応じた進捗。画面下から88%の位置で始まり、45%で出し切る
+    for (var i = 0; i < itemDriven.length; i++){
+      var it = itemDriven[i];
+      var top = it.el.getBoundingClientRect().top;
+      var start = vh * (0.88 - it.shift);
+      var end   = vh * (0.45 - it.shift);
+      it.el.style.setProperty("--progress", clamp((start - top) / (start - end)).toFixed(3));
+    }
+
+    // ページ先頭からのスクロール量に応じた進捗（FVの枠）
+    var p = clamp(window.scrollY / (vh * 0.7)).toFixed(3);
+    for (var j = 0; j < scrollDriven.length; j++){
+      scrollDriven[j].el.style.setProperty("--progress", p);
+    }
+  }
+
+  function request(){
+    if (!ticking){
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+
+  window.addEventListener("scroll", request, { passive:true });
+  window.addEventListener("resize", function(){ vh = window.innerHeight; request(); });
+  window.addEventListener("load", request);
+  update();
+})();
+</script>
+
 </body>
 </html>
