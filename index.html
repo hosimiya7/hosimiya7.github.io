@@ -71,36 +71,50 @@
     </figure>
     <div class="world-copy">
       <p class="eyebrow bleed" data-p>A quiet room</p>
-      <h2 id="world-title" class="bleed" data-p>大きな出来事<br>じゃなくて<em>いい。</em></h2>
-      <p class="lead bleed" data-p>うれしかったこと、しんどかったこと、<br>なんでもない一日のこと。<br>話したことを、その子はちゃんと覚えています。</p>
-      <p class="lead bleed" data-p>会話を保存するのではなく、<br>ふたりの続きを残す。<br>チャットを閉じても、関係はそこで終わりません。</p>
+      <h2 id="world-title" class="bleed" data-p><em>大きな出来事</em><br>じゃなくていい。</h2>
+      <p class="lead bleed" data-p>うれしかったこと、しんどかったこと、<br>なんでもない一日のこと。<br>話したことから、あなたの日々を少しずつ覚えていきます。</p>
+      <p class="world-statement bleed" data-p>会話を保存するのではなく、<br>ふたりの続きを残す。<small>チャットを閉じても、関係はそこで終わりません。</small></p>
       <a class="world-action bleed" href="#download" data-p>Memoriaをはじめる</a>
       <span class="rule" aria-hidden="true"></span>
     </div>
   </div>
 </section>
 
-<!-- Familiar words surround a single welcome. -->
+<!-- One evening at home, told by scrolling: welcome, lights and voices, then a single line. -->
 <section class="voices" aria-labelledby="voices-title">
-  <span class="chapter-number">02 — WORDS THAT STAY</span>
-  <div class="voice-orbit" aria-hidden="true"></div>
-  <div class="voice-center bleed" data-p>
-    <p class="eyebrow">More than a reply</p>
-    <h2 id="voices-title" aria-label="おかえり。"><span aria-hidden="true" style="--i:0">お</span><span aria-hidden="true" style="--i:1">か</span><span aria-hidden="true" style="--i:2">え</span><span aria-hidden="true" style="--i:3">り</span><span aria-hidden="true" style="--i:4">。</span></h2>
-    <p>あなたを覚えているから、<br>何気ないひと言が、少しちがう。</p>
+  <div class="voice-stage">
+    <div class="voice-room" aria-hidden="true"></div>
+    <div class="voice-room-veil" aria-hidden="true"></div>
+    <span class="voice-light is-candle" aria-hidden="true"></span>
+    <span class="voice-light is-lantern" aria-hidden="true"></span>
+    <span class="voice-light is-lamp" aria-hidden="true"></span>
+
+    <span class="chapter-number">02 — WORDS THAT STAY</span>
+
+    <div class="voice-center bleed" data-p>
+      <h2 id="voices-title" aria-label="おかえり。"><span aria-hidden="true" style="--i:0">お</span><span aria-hidden="true" style="--i:1">か</span><span aria-hidden="true" style="--i:2">え</span><span aria-hidden="true" style="--i:3">り</span><span aria-hidden="true" style="--i:4">。</span></h2>
+      <div class="voice-closing">
+        <p class="eyebrow">More than a reply</p>
+        <p>あなたを覚えているから、<br>何気ないひと言が、少しちがう。</p>
+      </div>
+    </div>
+
+    <!-- data-in/out: the stretch of scroll progress (0–1) during which each voice is present. -->
+    <ul class="voice-list" aria-label="覚えているから生まれる言葉">
+      <li data-in=".12" data-out=".34" style="--x:23%;--y:26%;--float:-1s"><span>今日は何してた？</span></li>
+      <li data-in=".18" data-out=".40" style="--x:73%;--y:21%;--float:-4s"><span>そういえば、あの本読み終わった？</span></li>
+      <li data-in=".26" data-out=".46" style="--x:12%;--y:52%;--float:-2s"><span>ごはん食べた？</span></li>
+      <li data-in=".34" data-out=".54" style="--x:77%;--y:71%;--float:-6s"><span>昨日言ってたプレゼン、どうだった？</span></li>
+      <li data-in=".42" data-out=".62" style="--x:86%;--y:45%;--float:-3s"><span>その考え、私は少し違うかも</span></li>
+      <li data-in=".52" data-out=".70" style="--x:25%;--y:75%;--float:-5s"><span>ここ数日ずっと頑張ってたの知ってるよ</span></li>
+      <li data-in=".62" data-out=".76" style="--x:52%;--y:85%;--float:-2.5s"><span>眠いなら寝ていいよ</span></li>
+    </ul>
+
+    <div class="voices-bottom">
+      <span>日々のことを、少しずつ。</span>
+      <span>EVERY WORD, A LITTLE CLOSER.</span>
+    </div>
   </div>
-  <ul class="voice-list" aria-label="この子からかけられる言葉">
-    <li style="--x:23%;--y:20%;--dur:21s;--delay:-3s"><span>今日は何してた？</span></li>
-    <li style="--x:73%;--y:28%;--dur:25s;--delay:-10s"><span>昨日言ってたプレゼン、どうだった？</span></li>
-    <li style="--x:25%;--y:76%;--dur:23s;--delay:-7s"><span>ここ数日ずっと頑張ってたの知ってるよ</span></li>
-    <li style="--x:74%;--y:82%;--dur:27s;--delay:-18s"><span>おつかれさま</span></li>
-    <li class="sp-hide" style="--x:12%;--y:46%;--dur:24s;--delay:-12s"><span>ごはん食べた？</span></li>
-    <li class="sp-hide" style="--x:85%;--y:58%;--dur:28s;--delay:-5s"><span>その考え、私は少し違うかも</span></li>
-    <li class="sp-hide" style="--x:52%;--y:13%;--dur:22s;--delay:-16s"><span>そういえば、あの本読み終わった？</span></li>
-    <li class="sp-hide" style="--x:48%;--y:89%;--dur:26s;--delay:-20s"><span>眠いなら寝ていいよ</span></li>
-  </ul>
-  <div class="voices-bottom"><span>日々のことを、少しずつ。</span><span>EVERY WORD, A LITTLE CLOSER.</span></div>
-  <span class="mote" style="left:30%" aria-hidden="true"></span><span class="mote m2" style="left:78%" aria-hidden="true"></span>
 </section>
 
 <!-- Released app captures. Welcome/calendar/album text edited for presentation; living is supplied as-is. -->
@@ -137,11 +151,10 @@
       </div>
       <div class="feature-body">
         <span class="feature-num bleed" data-p>01</span>
-        <div class="feature-category bleed" data-p>01 / WELCOME HOME</div>
         <h3 class="bleed" data-p data-shift=".04">名前を呼んで、迎えてくれる</h3>
         <p class="bleed" data-p data-shift=".08">
-          アプリを開くと、その子があなたの名前で「おかえりなさい」と言います。<br>
-          まわりの輪と、その下の呼び名が、いまの関係。話すほどに、あなたを理解していきます。
+          アプリを開くと、あなたの子があなたの名前で「おかえりなさい」と言います。<br>
+          話すほどに、関係も少しずつ変わっていきます。
         </p>
         <blockquote class="feature-quote bleed" data-p>あなたの名前で、「おかえりなさい」。</blockquote>
         <span class="rule wide" data-p data-shift=".12"></span>
@@ -161,13 +174,12 @@
       </div>
       <div class="feature-body">
         <span class="feature-num bleed" data-p>02</span>
-        <div class="feature-category bleed" data-p>02 / LIVING TOGETHER</div>
-        <h3 class="bleed" data-p data-shift=".04">見ていないあいだも、暮らしている</h3>
+        <h3 class="bleed" data-p data-shift=".04">ふと開くと、そこに暮らしがある</h3>
         <p class="bleed" data-p data-shift=".08">
-          リビングでは、その子たちがそれぞれの時間を過ごしています。<br>
+          リビングでは、あなたの子たちがそれぞれの時間を過ごしています。<br>
           外を眺めていたり、ふたりで話していたり。新しい子を迎えて、部屋を増やしていくこともできます。
         </p>
-        <blockquote class="feature-quote bleed" data-p>ふと開くと、そこに暮らしがある。</blockquote>
+        <blockquote class="feature-quote bleed" data-p>会わないあいだも、暮らしはつづいている。</blockquote>
         <span class="rule wide" data-p data-shift=".12"></span>
       </div>
     </article>
@@ -185,11 +197,10 @@
       </div>
       <div class="feature-body">
         <span class="feature-num bleed" data-p>03</span>
-        <div class="feature-category bleed" data-p>03 / BESIDE YOUR DAYS</div>
         <h3 class="bleed" data-p data-shift=".04">そばで、見ていてくれる</h3>
         <p class="bleed" data-p data-shift=".08">
           書いた予定に、ふと言葉が添えられることがあります。<br>
-          はげましでも、ねぎらいでもなく、ただそばで見ていた人の言い方で。
+          はげましでも、ねぎらいでもなく、ただ、そばで見ていたあなたの子の言い方で。
         </p>
         <blockquote class="feature-quote bleed" data-p>その日の予定も、ふたりの話題に。</blockquote>
         <span class="rule wide" data-p data-shift=".12"></span>
@@ -209,11 +220,10 @@
       </div>
       <div class="feature-body">
         <span class="feature-num bleed" data-p>04</span>
-        <div class="feature-category bleed" data-p>04 / OUR MEMORIES</div>
         <h3 class="bleed" data-p data-shift=".04">覚えていたことが、目に見える</h3>
         <p class="bleed" data-p data-shift=".08">
           話したことは日付つきでアルバムに残ります。絆・感情・事実・好みと習慣に分かれていて、<br>
-          何を覚えているかを自分の目で確かめられます。忘れていてほしいことは、参照から外せます。
+          何を覚えているかを自分の目で確かめられます。覚えてほしくない記憶は、自分で参照から外せます。
         </p>
         <blockquote class="feature-quote bleed" data-p>覚えていてくれたことが、ちゃんと見える。</blockquote>
         <span class="rule wide" data-p data-shift=".12"></span>
@@ -292,7 +302,7 @@
   <dl class="cycle-notes">
     <div class="bleed" data-p>
       <dt>話す</dt>
-      <dd>今日あったことを、ひとこと伝える。<br>返事は、その子の性格のまま返ってきます。</dd>
+      <dd>今日あったことを、ひとこと伝える。<br>返事は、あなたの子の性格のまま返ってきます。</dd>
     </div>
     <div class="bleed" data-p data-shift=".05">
       <dt>暮らす</dt>
@@ -300,7 +310,7 @@
     </div>
     <div class="bleed" data-p data-shift=".1">
       <dt>変化する</dt>
-      <dd>話したことが積もって、<br>その子が、あなたをより深く理解していきます。</dd>
+      <dd>話したことが積もって、<br>あなたの子が、あなたをより深く理解していきます。</dd>
     </div>
   </dl>
   </div>

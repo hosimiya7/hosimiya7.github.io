@@ -6,6 +6,8 @@
   const hero = document.querySelector('.hero');
   const heroStage = document.querySelector('.hero-stage');
   const voices = document.querySelector('.voices');
+  const voiceWords = [...document.querySelectorAll('.voice-list li')];
+  const voiceWindows = voiceWords.map(el => [Number(el.dataset.in), Number(el.dataset.out)]);
   const features = [...document.querySelectorAll('.feature')];
   const phones = [...document.querySelectorAll('.stage-phone')];
   const steps = [...document.querySelectorAll('.stage-steps span')];
@@ -56,7 +58,15 @@
     const featureRects = desktop.matches ? features.map(el => el.getBoundingClientRect()) : [];
     hero.style.setProperty('--hero-progress', clamp(-heroRect.top / Math.max(1, heroRect.height - vh)).toFixed(4));
     if (voiceRect.top < vh && voiceRect.bottom > 0) {
-      voices.style.setProperty('--voice-progress', clamp((vh - voiceRect.top) / (vh + voiceRect.height)).toFixed(4));
+      // Progress runs only while the stage is pinned, so scroll distance reads as time.
+      const p = clamp(-voiceRect.top / Math.max(1, voiceRect.height - vh));
+      voices.style.setProperty('--voice-progress', p.toFixed(4));
+      voiceWords.forEach((el, i) => {
+        const [start, end] = voiceWindows[i];
+        el.classList.toggle('is-on', p >= start && p < end);
+        el.classList.toggle('is-past', p >= end);
+      });
+      voices.classList.toggle('is-resting', p >= .8);
     }
     photos.forEach((el, i) => {
       const rect = photoRects[i];
