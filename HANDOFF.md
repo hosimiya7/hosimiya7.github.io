@@ -23,11 +23,12 @@
 | ファイル（assets/images/） | 内容・由来 |
 |---|---|
 | home-together-v2.webp | FV。3人と猫が過ごす部屋の生成イラスト |
+| welcome-home.webp | 「おかえり」専用。人物を奥に小さく配し、ソファ・灯り・本・マグを主役にした生成イラスト |
 | little-moments-v2.webp | カップ・本・猫の生成イラスト。世界観、機能背景、CTA |
 | genkan.webp | 提供されたリリース済みホーム画面を元に、AIで挨拶と関係の呼び名を編集 |
-| living.webp | 提供されたリリース済みリビング画面。内容は無変更、WebPに形式変換 |
-| calendar.webp | 提供されたリリース済み画面を元に、AIで予定への返答を編集 |
-| album.webp | 提供されたリリース済み画面を元に、AIで記憶の見出しを日常的な内容へ編集 |
+| living.webp | 提供されたリリース済み画面。耀と自室バーの水色アイコンをAI生成の人物へ差し替え |
+| calendar.webp | 提供されたリリース済み画面を元に、AIで予定への返答を編集。自室バーの水色アイコンも差し替え |
+| album.webp | 提供されたリリース済み画面を元に、AIで記憶の見出しを編集。下部のピンク・水色アイコンも差し替え |
 | social-preview.jpg | FVと同じ画像をJPEG化。OGP/Twitter用、1536×1024 |
 | botanical-sprig.svg / star-trail.svg | 葉・星の装飾 |
 

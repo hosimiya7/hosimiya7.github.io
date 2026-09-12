@@ -584,12 +584,12 @@ h2 {
   --dim:clamp(0,calc((var(--voice-progress,0) - .8) / .15),1)
 }
 
-/* The hero's home returns here as a presence, not a picture. */
+/* A wider view of home leaves room for the floating words. */
 .voice-room {
   position:absolute;
   inset:-5%;
   z-index:-4;
-  background:url("images/home-together-v2.webp") center 46%/cover no-repeat;
+  background:url("images/welcome-home.webp") center 46%/cover no-repeat;
   filter:saturate(1.1) blur(3px);
   opacity:calc(.1 + .6 * var(--lit) - .1 * var(--dim));
   transition:opacity .6s ease-out;
@@ -831,11 +831,12 @@ h2 {
   gap:20px;
   font-size:10px;
   letter-spacing:.18em;
-  color:#abb4c08a
+  color:#c4cbd4;
+  text-shadow:0 1px 5px #09131fcc
 }
 
 .voices-bottom span:last-child {
-  color:#fcebba8c
+  color:#fcebba
 }
 
 .features {
@@ -1972,7 +1973,7 @@ footer {
   }
 
   .voices-bottom span:first-child {
-    opacity:.8
+    opacity:1
   }
 
   .features {
