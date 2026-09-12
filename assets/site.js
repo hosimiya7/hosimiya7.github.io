@@ -6,6 +6,7 @@
   const hero = document.querySelector('.hero');
   const heroStage = document.querySelector('.hero-stage');
   const voices = document.querySelector('.voices');
+  const voiceStage = document.querySelector('.voice-stage');
   const voiceWords = [...document.querySelectorAll('.voice-list li')];
   const voiceWindows = voiceWords.map(el => [Number(el.dataset.in), Number(el.dataset.out)]);
   const features = [...document.querySelectorAll('.feature')];
@@ -54,12 +55,13 @@
     // Collect geometry first; write visual state only after all reads.
     const heroRect = heroStage.getBoundingClientRect();
     const voiceRect = voices.getBoundingClientRect();
+    const voiceStageHeight = voiceStage.offsetHeight;
     const photoRects = photos.map(el => el.getBoundingClientRect());
     const featureRects = desktop.matches ? features.map(el => el.getBoundingClientRect()) : [];
     hero.style.setProperty('--hero-progress', clamp(-heroRect.top / Math.max(1, heroRect.height - vh)).toFixed(4));
     if (voiceRect.top < vh && voiceRect.bottom > 0) {
       // Progress runs only while the stage is pinned, so scroll distance reads as time.
-      const p = clamp(-voiceRect.top / Math.max(1, voiceRect.height - vh));
+      const p = clamp(-voiceRect.top / Math.max(1, voiceRect.height - voiceStageHeight));
       voices.style.setProperty('--voice-progress', p.toFixed(4));
       voiceWords.forEach((el, i) => {
         const [start, end] = voiceWindows[i];
