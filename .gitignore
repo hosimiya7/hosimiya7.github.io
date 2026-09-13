@@ -1,7 +1,3 @@
 # Local exploration, generation records, and verification artifacts.
 /_local/
 /output/
-/assets/brand/*.zip
-/assets/brand/symbol-refinement/
-/assets/images/GENERATION*.md
-

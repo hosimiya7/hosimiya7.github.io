@@ -3,8 +3,4 @@ exclude:
   - HANDOFF.md
   - _local
   - output
-  - assets/brand/symbol-refinement
-  - assets/images/GENERATION.md
-  - assets/images/GENERATION-20260910.md
   - .gitignore
-

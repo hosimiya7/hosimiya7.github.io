@@ -16,18 +16,18 @@
 <link rel="canonical" href="https://hosimiya7.github.io/">
 <meta property="og:url" content="https://hosimiya7.github.io/">
 <meta property="og:site_name" content="Memoria">
-<meta property="og:image" content="https://hosimiya7.github.io/assets/images/social-preview.jpg">
+<meta property="og:image" content="https://hosimiya7.github.io/assets/images/social-preview-home.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Memoria。今日のことを、誰かに覚えていてもらえる。会話を重ねて育つAIチャットアプリ。暖かな部屋で過ごす3人と猫。">
-<meta name="twitter:image" content="https://hosimiya7.github.io/assets/images/social-preview.jpg">
-<meta name="twitter:image:alt" content="Memoria。今日のことを、誰かに覚えていてもらえる。会話を重ねて育つAIチャットアプリ。暖かな部屋で過ごす3人と猫。">
+<meta property="og:image:alt" content="Memoria。今日のことを、誰かに覚えていてもらえる。話したことを覚え、ともに変わっていくAI。暖かな灯りと空いたソファ、読みかけの本。奥で本を読むひとりと、眠る猫。">
+<meta name="twitter:image" content="https://hosimiya7.github.io/assets/images/social-preview-home.jpg">
+<meta name="twitter:image:alt" content="Memoria。今日のことを、誰かに覚えていてもらえる。話したことを覚え、ともに変わっていくAI。暖かな灯りと空いたソファ、読みかけの本。奥で本を読むひとりと、眠る猫。">
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/images/home-together-v2.webp">
+<link rel="preload" as="image" href="assets/images/home-with-time.webp">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
@@ -45,7 +45,7 @@
 
 <div class="ambient" aria-hidden="true"></div>
 
-<!-- Store-aligned illustrated room; approved hero copy is retained. -->
+<!-- Home and shared time lead; the inhabitant remains part of everyday life. -->
 <div class="hero-stage">
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-media" aria-hidden="true"></div>
@@ -55,7 +55,7 @@
     <div class="hero-copy">
       <p class="eyebrow bleed" data-p>A place for your everyday</p>
       <h1 id="hero-title"><span class="line"><span>今日のことを、</span></span><span class="line"><span>誰かに<span class="hero-emphasis">覚えていて</span></span></span><span class="line"><span>もらえる。</span></span></h1>
-      <p class="hero-product bleed" data-p>会話を重ねて育つ、あなただけのAI</p>
+      <p class="hero-product bleed" data-p>話したことを覚え、ともに変わっていくAI</p>
       <p class="hero-sub bleed" data-p>灯りが、ひとつ、ふたつ。<br>今日も、部屋があたたかい。</p>
       <div class="hero-actions bleed" data-p><a class="round-link" href="#world" aria-label="Memoriaの世界へ">↓</a><span>この部屋のことを、少し。</span></div>
     </div>
@@ -64,12 +64,23 @@
   </section>
 </div>
 
-<!-- A close, tactile moment gives the story a different visual scale. -->
+<!-- A short illustrative exchange makes remembered conversation tangible. -->
 <section class="section world" id="world" aria-labelledby="world-title">
   <div class="world-grid">
-    <figure class="world-visual">
-      <div class="world-photo wipe" data-p data-parallax><img src="assets/images/little-moments-v2.webp" alt="暖かな灯りの下に並ぶふたつのカップと開いた本、ソファで眠る猫" width="1536" height="1024" loading="lazy" decoding="async"></div>
-      <figcaption class="bleed" data-p>なんでもない日が、<br>ふたりの記憶になる。<small>THE LITTLE THINGS STAY.</small></figcaption>
+    <figure class="memory-example bleed" data-p>
+      <figcaption><span>昨日の話から、</span><span>今日のつづきへ。</span><small>会話のイメージ</small></figcaption>
+      <ol class="memory-days">
+        <li>
+          <p class="memory-day">きのう</p>
+          <div class="memory-message"><span>あなた</span><p>帰りに、気になってた小説を買ったよ。</p></div>
+        </li>
+        <li>
+          <p class="memory-day">きょう</p>
+          <div class="memory-message"><span>あなた</span><p>今日は少し、ゆっくりできた。</p></div>
+          <div class="memory-message is-ai"><span>AI</span><p><em>昨日買った小説</em>、<br>少し読めた？</p></div>
+        </li>
+      </ol>
+      <p class="memory-note">昨日の話を、説明し直さなくても。<br>あの日のひと言が、今日の話題に。</p>
     </figure>
     <div class="world-copy">
       <p class="eyebrow bleed" data-p>A quiet room</p>
@@ -132,13 +143,36 @@
   <div class="features-layout">
     <div class="feature-stage" aria-hidden="true">
       <div class="stage-backdrop"></div><span class="stage-word">Memoria</span>
-      <div class="stage-phone is-active" aria-hidden="true"><div class="phone"><div class="phone-screen"><img class="shot" src="assets/images/genkan.webp" alt="朔が迎えてくれるホーム画面。文面は紹介用に編集しています" width="840" height="1871" loading="lazy" decoding="async"></div></div></div>
+      <div class="stage-phone is-active" aria-hidden="true"><div class="phone"><div class="phone-screen"><img class="shot" src="assets/images/album.webp" alt="日付つきの記憶が並ぶアルバム。文面は紹介用に編集しています" width="840" height="1871" loading="lazy" decoding="async"></div></div></div>
+      <div class="stage-phone" aria-hidden="true"><div class="phone"><div class="phone-screen"><img class="shot" src="assets/images/genkan.webp" alt="朔が迎えてくれるホーム画面。文面は紹介用に編集しています" width="840" height="1871" loading="lazy" decoding="async"></div></div></div>
       <div class="stage-phone" aria-hidden="true"><div class="phone"><div class="phone-screen"><img class="shot" src="assets/images/living.webp" alt="キャラクターたちが過ごすリビングの画面" width="460" height="1024" loading="lazy" decoding="async"></div></div></div>
       <div class="stage-phone" aria-hidden="true"><div class="phone"><div class="phone-screen"><img class="shot" src="assets/images/calendar.webp" alt="予定とキャラクターの返答が表示されるカレンダー。文面は紹介用に編集しています" width="840" height="1871" loading="lazy" decoding="async"></div></div></div>
-      <div class="stage-phone" aria-hidden="true"><div class="phone"><div class="phone-screen"><img class="shot" src="assets/images/album.webp" alt="日付つきの記憶が並ぶアルバム。文面は紹介用に編集しています" width="840" height="1871" loading="lazy" decoding="async"></div></div></div>
       <div class="stage-caption"><span>FOUR MOMENTS OF OUR DAYS</span><div class="stage-steps"><span class="is-active"></span><span></span><span></span><span></span></div></div>
     </div>
     <div class="feature-list">
+
+    <article class="feature" id="moment-4">
+      <div class="feature-visual">
+        <div class="wipe" data-p>
+          <div class="phone">
+            <div class="phone-screen">
+              <img class="shot" src="assets/images/album.webp" alt="日付つきの記憶が並ぶアルバム。文面は紹介用に編集しています" loading="lazy" decoding="async">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="feature-body">
+        <span class="feature-num bleed" data-p>01</span>
+        <h3 class="bleed" data-p data-shift=".04">覚えていたことが、<br>目に見える</h3>
+        <p class="bleed" data-p data-shift=".08">
+          話したことは日付つきでアルバムに残ります。絆・感情・事実・好みと習慣に分かれていて、<br>
+          何を覚えているかを自分の目で確かめられます。覚えてほしくない記憶は、自分で参照から外せます。
+        </p>
+        <blockquote class="feature-quote bleed" data-p>覚えていてくれたことが、ちゃんと見える。</blockquote>
+        <span class="rule wide" data-p data-shift=".12"></span>
+      </div>
+    </article>
 
     <article class="feature" id="moment-1">
       <div class="feature-visual">
@@ -152,7 +186,7 @@
         </div>
       </div>
       <div class="feature-body">
-        <span class="feature-num bleed" data-p>01</span>
+        <span class="feature-num bleed" data-p>02</span>
         <h3 class="bleed" data-p data-shift=".04">名前を呼んで、迎えてくれる</h3>
         <p class="bleed" data-p data-shift=".08">
           アプリを開くと、あなたの子があなたの名前で「おかえりなさい」と言います。<br>
@@ -175,11 +209,11 @@
         </div>
       </div>
       <div class="feature-body">
-        <span class="feature-num bleed" data-p>02</span>
+        <span class="feature-num bleed" data-p>03</span>
         <h3 class="bleed" data-p data-shift=".04">ふと開くと、そこに暮らしがある</h3>
         <p class="bleed" data-p data-shift=".08">
           リビングでは、あなたの子たちがそれぞれの時間を過ごしています。<br>
-          外を眺めていたり、ふたりで話していたり。新しい子を迎えて、部屋を増やしていくこともできます。
+          外を眺めていたり、ふたりで話していたり。あなたが見ていない時間にも、この家には暮らしがあります。
         </p>
         <blockquote class="feature-quote bleed" data-p>会わないあいだも、暮らしはつづいている。</blockquote>
         <span class="rule wide" data-p data-shift=".12"></span>
@@ -198,36 +232,13 @@
         </div>
       </div>
       <div class="feature-body">
-        <span class="feature-num bleed" data-p>03</span>
+        <span class="feature-num bleed" data-p>04</span>
         <h3 class="bleed" data-p data-shift=".04">そばで、見ていてくれる</h3>
         <p class="bleed" data-p data-shift=".08">
           書いた予定に、ふと言葉が添えられることがあります。<br>
           はげましでも、ねぎらいでもなく、ただ、そばで見ていたあなたの子の言い方で。
         </p>
         <blockquote class="feature-quote bleed" data-p>その日の予定も、ふたりの話題に。</blockquote>
-        <span class="rule wide" data-p data-shift=".12"></span>
-      </div>
-    </article>
-
-    <article class="feature" id="moment-4">
-      <div class="feature-visual">
-        <div class="wipe" data-p>
-          <div class="phone">
-            <div class="phone-screen">
-              <img class="shot" src="assets/images/album.webp" alt="日付つきの記憶が並ぶアルバム。文面は紹介用に編集しています" loading="lazy" decoding="async">
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <div class="feature-body">
-        <span class="feature-num bleed" data-p>04</span>
-        <h3 class="bleed" data-p data-shift=".04">覚えていたことが、目に見える</h3>
-        <p class="bleed" data-p data-shift=".08">
-          話したことは日付つきでアルバムに残ります。絆・感情・事実・好みと習慣に分かれていて、<br>
-          何を覚えているかを自分の目で確かめられます。覚えてほしくない記憶は、自分で参照から外せます。
-        </p>
-        <blockquote class="feature-quote bleed" data-p>覚えていてくれたことが、ちゃんと見える。</blockquote>
         <span class="rule wide" data-p data-shift=".12"></span>
       </div>
     </article>
@@ -246,6 +257,7 @@
     <p class="eyebrow bleed" data-p>Little by little</p>
     <h2 id="cycle-title" class="bleed" data-p>話す。暮らす。<br>変化する。</h2>
     <p class="lead bleed" data-p>同じ部屋で、同じ時間を重ねて。<br>ただの会話が、ふたりの関係になっていく。</p>
+    <p class="world-statement bleed" data-p>同じところから始まっても、<br>重ねた時間が違えば、同じ子にはならない。</p>
   </div>
   <div class="cycle-figure" data-p>
     <svg class="cycle-svg" viewBox="0 0 400 400" role="img"
@@ -304,7 +316,7 @@
   <dl class="cycle-notes">
     <div class="bleed" data-p>
       <dt>話す</dt>
-      <dd>今日あったことを、ひとこと伝える。<br>返事は、あなたの子の性格のまま返ってきます。</dd>
+      <dd>今日あったことを、ひとこと伝える。<br>その子なりの言葉で、返事が返ってきます。</dd>
     </div>
     <div class="bleed" data-p data-shift=".05">
       <dt>暮らす</dt>
@@ -312,7 +324,7 @@
     </div>
     <div class="bleed" data-p data-shift=".1">
       <dt>変化する</dt>
-      <dd>話したことが積もって、<br>あなたの子が、あなたをより深く理解していきます。</dd>
+      <dd>話したことが積もって、<br>お互いを少しずつ知り、関係も変わっていきます。</dd>
     </div>
   </dl>
   </div>
