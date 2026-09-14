@@ -176,6 +176,12 @@ h2 {
   color:var(--muted)
 }
 
+/* Short copy wraps only at punctuation and <wbr> phrase marks, never mid-word (works in Safari too). */
+h2,h3,.lead,.world-statement,.feature-body>p,.feature-quote,.cycle-notes dd,.voice-closing p,figcaption,.features-intro,.hero-product,.hero-sub,.voice-list span,.screens-note {
+  word-break:keep-all;
+  overflow-wrap:anywhere
+}
+
 .section {
   position:relative;
   padding:130px var(--side)
@@ -554,9 +560,10 @@ h2 {
   border-bottom:1px solid #fff8e808
 }
 
-/* With motion the section becomes a pinned evening: scroll distance is time. */
+/* With motion the section becomes a pinned evening: scroll distance is time.
+   Extra length near the end keeps the closing line on screen long enough to read. */
 .motion .voices {
-  height:300svh
+  height:380svh
 }
 
 .voice-stage {
@@ -582,14 +589,15 @@ h2 {
   --dim:clamp(0,calc((var(--voice-progress,0) - .8) / .15),1)
 }
 
-/* A wider view of home leaves room for the floating words. */
+/* The entryway seen on arrival; its dark walls leave room for the floating words. */
 .voice-room {
   position:absolute;
   inset:-5%;
   z-index:-4;
-  background:url("images/welcome-home.webp") center 46%/cover no-repeat;
-  filter:saturate(1.1) blur(3px);
-  opacity:calc(.1 + .6 * var(--lit) - .1 * var(--dim));
+  background:url("images/voices-genkan.webp") center 46%/cover no-repeat;
+  /* Warmed and lifted so the entryway reads as welcoming, not eerie. */
+  filter:saturate(1.2) sepia(.28) brightness(1.55) blur(1px);
+  opacity:calc(.3 + .7 * var(--lit) - .1 * var(--dim));
   transition:opacity .6s ease-out;
   animation:voice-room-breathe 16s ease-in-out infinite alternate;
   will-change:transform,opacity
@@ -601,7 +609,7 @@ h2 {
   inset:0;
   z-index:-3;
   background:radial-gradient(ellipse 36% 24% at 50% 50%,#09131f99,transparent),linear-gradient(90deg,#09131fd9 0%,#09131f80 28%,#09131f59 50%,#09131f80 75%,#09131fe0 100%),linear-gradient(180deg,#09131fb3 0%,#09131f26 43%,#09131fbf 100%);
-  opacity:calc(1 - .28 * var(--lit) + .12 * var(--dim));
+  opacity:calc(.9 - .6 * var(--lit) + .12 * var(--dim));
   transition:opacity .6s ease-out
 }
 
@@ -627,22 +635,22 @@ h2 {
 }
 
 .voice-light.is-candle {
-  --lx:57%;
-  --ly:86%;
+  --lx:81%;
+  --ly:70%;
   --ls:min(30vw,420px);
   --on:.08
 }
 
 .voice-light.is-lantern {
-  --lx:7%;
-  --ly:68%;
+  --lx:2%;
+  --ly:30%;
   --ls:min(26vw,360px);
   --on:.18
 }
 
 .voice-light.is-lamp {
-  --lx:60%;
-  --ly:19%;
+  --lx:64%;
+  --ly:2%;
   --ls:min(42vw,580px);
   --on:.28
 }
@@ -657,7 +665,7 @@ h2 {
   top:50%;
   transform:translate(-50%,-50%);
   background:radial-gradient(ellipse,#f294412b 0%,#fcebba0d 42%,transparent 72%);
-  opacity:calc(.3 + .7 * var(--lit));
+  opacity:calc(.5 + var(--lit));
   pointer-events:none
 }
 
@@ -903,7 +911,7 @@ h2 {
   aspect-ratio:4/5;
   border-radius:46% 46% 24px 24px;
   border-color:var(--line);
-  background:linear-gradient(#0c152459,#0c1524d9),url("images/little-moments-v2.webp") center/cover;
+  background:radial-gradient(ellipse 70% 55% at 50% 58%,#f294411f,transparent 70%),linear-gradient(170deg,#1a2c44,var(--night) 70%);
   transform:rotate(-5deg)
 }
 
@@ -914,17 +922,6 @@ h2 {
   inset:12px;
   border-color:var(--line);
   border-radius:inherit
-}
-
-.stage-word {
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  font:clamp(90px,12vw,180px)/1 var(--serif);
-  color:#fcebba07;
-  letter-spacing:-.02em;
-  white-space:nowrap
 }
 
 .stage-phone {
@@ -1052,7 +1049,8 @@ h2 {
   line-height:2.15;
   letter-spacing:.04em;
   color:var(--muted);
-  margin-top:24px
+  margin-top:24px;
+  text-wrap:pretty
 }
 
 .feature-body .rule {
@@ -1256,15 +1254,17 @@ h2 {
   overflow:hidden
 }
 
+/* Wider than the section so the one lit window sits in the space beside the card. */
 .cta-photo {
   position:absolute;
   inset:-8% 0;
   z-index:-3;
-  width:100%;
+  width:116%;
   height:116%;
   max-width:none;
   object-fit:cover;
   object-position:center;
+  filter:brightness(1.6) saturate(1.15) sepia(.12);
   transform:translateY(calc(var(--photo-progress,.5)*-6%))
 }
 
@@ -1273,7 +1273,7 @@ h2 {
   position:absolute;
   inset:0;
   z-index:-2;
-  background:linear-gradient(0deg,var(--night),#0c152433 48%,var(--night)),linear-gradient(90deg,#0c152459,#0c152480)
+  background:linear-gradient(0deg,var(--night),#0c152400 25%,#0c152400 78%,#0c152466)
 }
 
 .cta .narrow {
@@ -1282,7 +1282,7 @@ h2 {
   max-width:760px;
   border:1px solid var(--line);
   border-radius:36px;
-  background:#0c1524de;
+  background:#0c1524b0;
   backdrop-filter:blur(12px)
 }
 
@@ -1872,7 +1872,7 @@ footer {
   }
 
   .motion .voices {
-    height:280svh
+    height:340svh
   }
 
   .voice-stage {
@@ -1881,14 +1881,15 @@ footer {
     max-height:780px
   }
 
+  /* Keeps the hall, the pendant and the floor lantern in the narrow crop. */
   .voice-room {
     inset:-8%;
-    background-position:60% center
+    background-position:76% center
   }
 
   .voice-light.is-candle {
-    --lx:48%;
-    --ly:87%;
+    --lx:86%;
+    --ly:70%;
     --ls:70vw
   }
 
@@ -1897,8 +1898,8 @@ footer {
   }
 
   .voice-light.is-lamp {
-    --lx:58%;
-    --ly:18%;
+    --lx:26%;
+    --ly:2%;
     --ls:95vw
   }
 
@@ -2045,10 +2046,6 @@ footer {
     margin-top:18px
   }
 
-  .feature-body>p br {
-    display:none
-  }
-
   .feature-quote {
     font-size:16px;
     margin-top:26px
@@ -2119,7 +2116,7 @@ footer {
   }
 
   .cta-photo {
-    object-position:65% center
+    object-position:80% center
   }
 
   .store-row {
