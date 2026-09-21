@@ -1,7 +1,7 @@
 /* UI and headlines stay still. Only the light behind them changes. */
 :root{--night:#0c1524;--paper:#fff8eb;--muted:#bcc4cf;--amber:#f29441;--glow:#fcebba;--line:#fff0cf26;--sans:"Zen Kaku Gothic New","Yu Gothic",sans-serif;--side:clamp(24px,6vw,100px)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{background:var(--night);color:var(--paper);font-family:var(--sans);scroll-behavior:smooth;scroll-padding-top:40px}
+html{background:var(--night);color:var(--paper);font-family:var(--sans);scroll-behavior:smooth;scroll-padding-top:96px}
 body{-webkit-font-smoothing:antialiased}
 ::selection{background:var(--glow);color:var(--night)}
 a{color:inherit;text-decoration:none}img{display:block;max-width:100%;height:auto}ul{list-style:none}button{font:inherit}
@@ -9,9 +9,8 @@ h1,h2,h3{font-weight:500;letter-spacing:.015em;text-wrap:balance}
 a:focus-visible,button:focus-visible{outline:2px solid var(--glow);outline-offset:6px}
 .skip-link{position:fixed;top:12px;left:12px;z-index:100;padding:12px 20px;background:var(--paper);color:var(--night);transform:translateY(-180%)}
 .skip-link:focus{transform:none}
-.site-header{position:absolute;inset:0 0 auto;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px var(--side)}
+.site-header{position:fixed;inset:0 0 auto;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px var(--side)}
 .site-header{isolation:isolate}
-.site-header::before{content:"";position:absolute;inset:0 0 -56px;z-index:-1;pointer-events:none;background:linear-gradient(#0c1524ed,#0c1524b8 55%,transparent)}
 .brand{display:flex;align-items:center;min-height:44px}.brand-wordmark{width:148px}
 .header-nav{display:flex;align-items:center;gap:32px;font-size:15px;font-weight:500;text-shadow:0 1px 8px #030812}
 .header-nav>a:not(.nav-download){color:var(--paper)}
@@ -83,7 +82,7 @@ footer{border-top:1px solid var(--line);max-width:1440px;margin:auto;padding:42p
   .store-btn{min-width:146px;padding-inline:12px}.store-btn b{font-size:18px}.feature{gap:45px}h3{font-size:32px}.feature-copy>p:not(.feature-label):not(.release-note){font-size:14px}.section-heading>p{font-size:12px}
 }
 @media(max-width:760px){
-  :root{--side:24px}html{scroll-padding-top:24px}.site-header{padding:16px var(--side);gap:16px}.brand-wordmark{width:118px}.header-nav>a:not(.nav-download){display:none}.nav-download{font-size:11px;gap:12px}
+  :root{--side:24px}html{scroll-padding-top:84px}.site-header{padding:12px var(--side);gap:16px}.brand-wordmark{width:118px}.header-nav>a:not(.nav-download){display:none}.nav-download{font-size:11px;gap:12px}
   .hero{padding-top:124px}.hero-room{background:linear-gradient(#0c1524f5 10%,#0c1524cb 35%,#0c152480 60%,#0c1524 98%),url('images/home-with-time.webp') 62% center/cover}
   .hero-inner{display:flex;flex-direction:column;gap:30px;padding-bottom:36px}.hero-copy{width:100%}.eyebrow{font-size:10px;letter-spacing:.075em}
   h1{margin-top:16px;font-size:clamp(29px,8.2vw,44px);line-height:1.5;letter-spacing:0}h1>br:first-child{display:none}.mobile-break{display:block}
@@ -259,7 +258,7 @@ html:not(.motion-ready) .rising-lights i,html:not(.motion-ready) .cycle-svg .orb
 .tarot-name,.tarot-meaning,.tarot-comment{opacity:0;translate:0 1.5cqw;transition:opacity .6s,translate .6s}
 .show-card .tarot-name,.show-card .tarot-meaning,.show-line .tarot-comment{opacity:1;translate:none}
 .show-card .tarot-meaning{transition-delay:.15s}
-.tarot-demo figcaption{display:flex;flex-direction:column;align-items:center;gap:12px;min-height:52px}
+.tarot-demo .demo-controls{display:flex;justify-content:center;margin-top:16px;min-height:44px}
 .tarot-note,.album-note{font-size:12px;line-height:1.9;color:var(--muted)}
 .tarot-again{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 4px;border:0;border-bottom:1px solid #fcebba55;background:none;color:var(--paper);font-size:14px;letter-spacing:.06em;cursor:pointer}
 .tarot-again:hover{color:var(--glow);border-color:var(--glow)}
@@ -321,4 +320,27 @@ html:not(.motion-ready) .rising-lights i,html:not(.motion-ready) .cycle-svg .orb
 .album-sheet-title{margin-top:1.6cqw;padding-right:10cqw;font-size:4.4cqw;line-height:1.5;letter-spacing:.04em;color:#ffffffe0}
 .album-sheet-body{margin-top:3.4cqw;font-size:3.2cqw;line-height:1.86;letter-spacing:.1em;color:#ffffffb3}
 .album-sheet-toggle{display:flex;align-items:center;gap:2.8cqw;height:8.5cqw;margin:2.2cqw 0 0 auto;padding:0 3.6cqw 0 3.4cqw;border:1px solid #ffffff2e;border-radius:999px;background:#ffffff0f;color:#ffffffe0;font-size:2.9cqw;letter-spacing:.06em;cursor:pointer}
-.album-demo figcaption{margin-top:20px;text-align:center}
+.app-capture .demo-guide{display:flex;justify-content:center;align-items:center;min-height:32px;margin:0 0 16px;text-align:center}
+.app-capture .demo-guide span{font-size:13px;line-height:1.8;color:var(--glow);margin:0}
+.demo-guide span::before{content:"✧";margin-right:8px;color:var(--amber)}
+.album-demo:not(.is-ready) .demo-guide,.tarot-demo:not(.is-ready) .demo-guide{visibility:hidden}
+
+.faq{padding-block:65px 25px}
+.faq-inner{max-width:850px;margin:auto}
+.faq h2{font-size:32px;margin-bottom:30px}
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{position:relative;list-style:none;cursor:pointer;padding:24px 38px 24px 0;font-size:16px;line-height:1.8;color:var(--paper)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:24px;color:var(--glow);font-size:22px;line-height:1.3}
+.faq details[open] summary::after{content:"−"}
+.faq summary:focus-visible{outline:2px solid var(--glow);outline-offset:4px}
+.faq-answer{padding:0 28px 26px 0;font-size:14px;line-height:2;color:var(--muted)}
+.faq-answer p+p{margin-top:12px}
+@media(max-width:760px){
+  .faq{padding-block:45px 10px}.faq h2{font-size:28px;margin-bottom:24px}
+  .faq summary{font-size:15px;padding-block:22px}.faq summary::after{top:22px}
+  .faq-answer{padding-right:0;font-size:14px}
+}
+.faq-answer a{color:var(--paper);text-decoration:underline;text-decoration-color:#fcebba66;text-underline-offset:4px}
+.faq-answer a:hover{color:var(--glow)}

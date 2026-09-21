@@ -4,3 +4,4 @@ exclude:
   - _local
   - output
   - .gitignore
+  - tools
