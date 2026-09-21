@@ -213,3 +213,80 @@ html:not(.motion-ready) .rising-lights i,html:not(.motion-ready) .cycle-svg .orb
 
 
 @media(max-width:760px){.nav-download{font-size:13px}.hero{padding-top:104px}}
+
+/* On phones a pair becomes one screen at a time. The next screen peeks in and the
+   numbered steps above name the order, so the row reads as swipeable before it is touched. */
+.pair-art{flex-direction:column;align-items:stretch;min-width:0}
+.pair-steps{display:none}
+@media(max-width:760px){
+  .pair-steps{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+  .pair-steps button{display:flex;align-items:center;gap:8px;min-height:40px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:none;color:var(--muted);font-size:12px;letter-spacing:.04em;cursor:pointer;transition:color .2s,border-color .2s,background .2s}
+  .pair-steps button span{font:10px Arial,sans-serif;color:inherit}
+  .pair-steps button[aria-pressed="true"]{color:var(--glow);border-color:#fcebba80;background:#fcebba0f}
+  .pair-steps button[aria-pressed="true"] span{color:var(--amber)}
+  .pair-steps i{font-style:normal;font-size:11px;color:#fcebba66}
+  .pair-art .screen-pair{position:relative;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;margin-inline:calc(var(--side)*-1);padding-inline:var(--side);scroll-padding-inline:var(--side)}
+  .pair-art .screen-pair::-webkit-scrollbar{display:none}
+  .pair-art .screen-pair .app-capture{flex:0 0 min(80%,300px);max-width:none;scroll-snap-align:start}
+  .pair-art .screen-pair .app-capture:last-child{scroll-snap-align:end}
+}
+
+/* 今日の一枚 can be drawn on the page. The app's own choice screen is the frame; the screen area
+   below its title is live, laid out in the app's proportions and sized to the phone (cqw). */
+.tarot-phone{position:relative}
+.tarot-screen{position:absolute;left:5.774%;width:87.469%;top:15.225%;height:74.848%;container-type:inline-size;background:linear-gradient(#0d1f3c,#10294e 36.6%,#13305e 61%,#1a3d73)}
+.tarot-deck{position:absolute;inset:0;perspective:1400px}
+.tarot-card{position:absolute;top:11.23%;width:24.16%;aspect-ratio:2/3;padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:left .8s cubic-bezier(.2,.7,.2,1),top .8s cubic-bezier(.2,.7,.2,1),width .8s cubic-bezier(.2,.7,.2,1),opacity .5s,translate .3s}
+.tarot-card:nth-child(1){left:9.55%}.tarot-card:nth-child(2){left:37.92%}.tarot-card:nth-child(3){left:66.29%}
+.tarot-card:focus-visible{outline:2px solid var(--glow);outline-offset:4px;border-radius:6px}
+.tarot-demo:not(.is-drawn) .tarot-card:hover,.tarot-demo:not(.is-drawn) .tarot-card:focus-visible{translate:0 -4%}
+.tarot-flip{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .8s .15s cubic-bezier(.3,.6,.2,1)}
+.tarot-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:4%;overflow:hidden;box-shadow:0 8px 20px #02070f66}
+.tarot-face img{width:100%;height:100%;object-fit:cover}
+.tarot-front{transform:rotateY(180deg)}
+.tarot-card.is-picked{left:28%;top:1%;width:44%;cursor:default}
+.tarot-card.is-picked .tarot-flip{transform:rotateY(180deg)}
+.is-drawn .tarot-card:not(.is-picked){opacity:0;translate:0 6%;pointer-events:none}
+.tarot-hint{position:absolute;top:46.9%;inset-inline:0;text-align:center;font-size:3.3cqw;letter-spacing:.08em;color:#d6dce6;transition:opacity .4s}
+.is-drawn .tarot-hint{opacity:0}
+.tarot-reading{position:absolute;top:41.5%;inset-inline:0;padding-inline:6.5%;text-align:center}
+.tarot-name{font-size:5.4cqw;letter-spacing:.08em;color:var(--paper)}
+.tarot-meaning{margin-top:2.6cqw;font-size:3.3cqw;line-height:1.85;letter-spacing:.04em;color:#c3cad6}
+.tarot-comment{display:grid;grid-template-columns:12cqw minmax(0,1fr);column-gap:3.4cqw;margin-top:6cqw;text-align:left}
+.tarot-avatar{grid-row:1/3;width:12cqw;height:12cqw;border-radius:50%}
+.tarot-speaker{font-size:2.9cqw;color:#8f9bb0;letter-spacing:.06em}
+.tarot-line{margin-top:1.6cqw;padding-left:3.4cqw;border-left:.7cqw solid;border-image:linear-gradient(#f29441,#f2944133) 1;font-size:3.5cqw;line-height:1.9;letter-spacing:.03em;color:var(--paper)}
+.tarot-name,.tarot-meaning,.tarot-comment{opacity:0;translate:0 1.5cqw;transition:opacity .6s,translate .6s}
+.show-card .tarot-name,.show-card .tarot-meaning,.show-line .tarot-comment{opacity:1;translate:none}
+.show-card .tarot-meaning{transition-delay:.15s}
+.tarot-demo figcaption{display:flex;flex-direction:column;align-items:center;gap:12px;min-height:52px}
+.tarot-note{font-size:12px;line-height:1.9;color:var(--muted)}
+.tarot-again{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 4px;border:0;border-bottom:1px solid #fcebba55;background:none;color:var(--paper);font-size:14px;letter-spacing:.06em;cursor:pointer}
+.tarot-again:hover{color:var(--glow);border-color:var(--glow)}
+.tarot-again[hidden],.tarot-note[hidden]{display:none}
+@media(max-width:760px){.tarot-note{font-size:11px}}
+
+/* The hero conversation replays once: a night's talk, then the next morning's reply that remembers it.
+   The list is laid over the screenshot's message area in the app's proportions (cqw of the screen),
+   and new messages push the log up as they would in the app. It ends on the screenshot's view. */
+.hero-product .screen-image{position:relative}
+.chat-live{display:none;position:absolute;left:5.229%;width:88.889%;top:12.548%;height:69.236%;overflow-y:auto;scrollbar-width:none;user-select:none;-webkit-user-select:none;cursor:grab;container-type:inline-size;background:linear-gradient(#0a1626,#0d1f38 37%,#132d4f 74%,#16355f)}
+.chat-ready .chat-live{display:block}
+.chat-live::-webkit-scrollbar{display:none}.chat-live.is-dragging{cursor:grabbing}
+.chat-log{display:flex;flex-direction:column;justify-content:flex-end;min-height:100%;padding:2cqw 0 .3cqw}
+.msg p{font-size:3.47cqw;line-height:1.82;color:#eef1f6}
+.msg.ai{position:relative;margin-top:5.1cqw;padding-left:8.53cqw}.msg.ai p{max-width:23.2em}
+.msg.ai::before{content:"";position:absolute;left:4.12cqw;width:.74cqw;top:-1.2cqw;bottom:3cqw;background:linear-gradient(#f29441,#f294411f)}
+.msg.me{align-self:flex-end;max-width:64cqw;margin:3.7cqw 2.8cqw 0 0;padding:2.76cqw 3.6cqw;border-radius:2.9cqw;background:#1c3d6a}
+.chat-day{display:flex;align-items:center;gap:3cqw;align-self:center;margin-top:5.1cqw;font-size:2.9cqw;letter-spacing:.3em;color:#9aa6b8}
+.chat-day::before,.chat-day::after{content:"";width:9cqw;height:1px;background:#9aa6b855}
+.chat-log mark{background:none;color:inherit}
+.is-remembered .chat-log mark{font-weight:700}
+.chat-live [data-step]:not(.is-shown){display:none}
+.chat-live [data-step].is-shown{animation:msg-in .45s ease-out}
+@keyframes msg-in{from{opacity:0}}
+.chat-typing{display:flex;gap:1.3cqw;height:6.3cqw;align-items:center}
+.chat-typing::before{bottom:0}
+.chat-typing i{width:1.5cqw;height:1.5cqw;border-radius:50%;background:#c3cad6;animation:typing 1.2s infinite ease-in-out}
+.chat-typing i:nth-child(2){animation-delay:.15s}.chat-typing i:nth-child(3){animation-delay:.3s}
+@keyframes typing{0%,60%,100%{opacity:.3}30%{opacity:1}}
