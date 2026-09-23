@@ -84,6 +84,21 @@
       start.observe(screen);
     });
   }
+  // The last five characters before each line break or block end stay together, so a line never ends with a lone "す。".
+  document.querySelectorAll('main p, main dd').forEach(block => {
+    if (block.closest('.screen-image')) return;
+    [...block.childNodes].forEach(node => {
+      const next = node.nextSibling;
+      if (node.nodeType !== Node.TEXT_NODE || (next && next.nodeName !== 'BR')) return;
+      const text = node.data.trimEnd();
+      if (text.length < 6) return;
+      const tail = document.createElement('span');
+      tail.className = 'nowrap';
+      tail.textContent = text.slice(-5);
+      node.data = text.slice(0, -5);
+      block.insertBefore(tail, next);
+    });
+  });
   const syncVisibility = () => root.classList.toggle('page-hidden', document.hidden);
   document.addEventListener('visibilitychange', syncVisibility);
   syncVisibility();

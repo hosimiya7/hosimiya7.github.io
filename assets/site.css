@@ -6,6 +6,10 @@ body{-webkit-font-smoothing:antialiased}
 ::selection{background:var(--glow);color:var(--night)}
 a{color:inherit;text-decoration:none}img{display:block;max-width:100%;height:auto}ul{list-style:none}button{font:inherit}
 h1,h2,h3{font-weight:500;letter-spacing:.015em;text-wrap:balance}
+/* Short copy breaks only at punctuation, spaces and <wbr>; anywhere is kept as a guard against overflow. */
+h1,h2,h3,summary,dt,blockquote,.feature-label{word-break:keep-all;overflow-wrap:anywhere}
+/* Body text avoids a short last line; site.js also keeps each sentence's last five characters together, so no lone "す。". */
+p,dd,li{text-wrap:pretty}.nowrap{white-space:nowrap}
 a:focus-visible,button:focus-visible{outline:2px solid var(--glow);outline-offset:6px}
 .skip-link{position:fixed;top:12px;left:12px;z-index:100;padding:12px 20px;background:var(--paper);color:var(--night);transform:translateY(-180%)}
 .skip-link:focus{transform:none}
@@ -18,13 +22,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--glow);outline-offse
 .nav-download:hover,.text-link:hover{color:var(--glow);border-color:var(--glow)}
 
 .eyebrow{display:flex;align-items:center;gap:10px;color:var(--glow);font-size:12px;font-weight:500;letter-spacing:.1em;line-height:1.8}
-.light-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);box-shadow:0 0 14px #f2944180;flex:none}
 .hero{position:relative;isolation:isolate;overflow:hidden;padding:116px var(--side) 0}
 .hero-room{position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#0c1524 5%,#0c1524ef 35%,#0c1524b3 73%,#0c152499),linear-gradient(0deg,#0c1524,transparent 45%),url('images/home-with-time.webp') center/cover}
 
 .hero-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr auto auto 1fr;column-gap:55px;align-items:center;padding-bottom:45px}
 .hero-copy{grid-column:1;grid-row:2}
-h1{margin-top:26px;font-size:clamp(42px,3.65vw,56px);line-height:1.5;letter-spacing:.01em}h1 em{font-style:normal;color:var(--glow);white-space:nowrap}.mobile-break{display:none}
+h1{margin-top:0;font-size:clamp(42px,3.65vw,56px);line-height:1.5;letter-spacing:.01em}h1 em{font-style:normal;color:var(--glow);white-space:nowrap}.mobile-break{display:none}
 .hero-core{font-size:17px;margin-top:30px;line-height:1.9}.hero-description{color:var(--muted);font-size:14px;line-height:2;margin-top:16px}
 /* The phone fits under the fixed header on common laptop heights; the copy centers on it. */
 .hero-product{grid-column:2;grid-row:1/5;justify-self:center;width:clamp(290px,calc((100svh - 160px) / 2.05),390px);max-width:100%}
@@ -61,9 +64,7 @@ h3{font-size:clamp(32px,3.15vw,45px);line-height:1.55}
 .feature-copy blockquote{font-size:20px;line-height:1.9;color:var(--glow);margin-top:32px}
 .feature-reverse .feature-copy{grid-column:2;grid-row:1}.feature-reverse .feature-art{grid-column:1;grid-row:1}
 
-
 .feature-living::before{content:"";position:absolute;z-index:-2;inset:0;pointer-events:none;background:linear-gradient(90deg,#0c1524 8%,#0c1524e6 45%,#0c1524bf 75%),url('images/home-with-time.webp') center/cover}
-
 
 
 .release-note{display:inline-block;margin-bottom:20px;padding-bottom:7px;border-bottom:1px solid #f2944160;color:var(--glow);font-size:11px;line-height:1.7}
@@ -85,13 +86,13 @@ footer{border-top:1px solid var(--line);max-width:1440px;margin:auto;padding:42p
 @media(min-width:1600px){.hero-room{background-position:center 58%}}
 @media(max-width:1100px){
   .hero-inner{column-gap:35px;grid-template-columns:1.12fr 1fr}h1{font-size:45px}.hero-product{width:clamp(290px,calc((100svh - 160px) / 2.05),370px)}.hero-core{font-size:15px}.hero-description{font-size:13px}
-  .store-btn{min-width:146px;padding-inline:12px}.store-btn b{font-size:18px}.feature{gap:45px}h3{font-size:32px}.feature-copy>p:not(.feature-label):not(.release-note){font-size:14px}.section-heading>p{font-size:12px}
+  .store-btn{min-width:146px;padding-inline:12px}.store-btn b{font-size:18px}.feature{gap:45px}h3{font-size:clamp(28px,3.9vw,32px)}.feature-copy>p:not(.feature-label):not(.release-note){font-size:14px}.section-heading>p{font-size:12px}
 }
 @media(max-width:760px){
   :root{--side:24px}html{scroll-padding-top:84px}.site-header{padding:12px var(--side);gap:16px}.brand-wordmark{width:118px}.header-nav>a:not(.nav-download){display:none}.nav-download{font-size:11px;gap:12px}
   .hero{padding-top:124px}.hero-room{background:linear-gradient(#0c1524f5 10%,#0c1524cb 35%,#0c152480 60%,#0c1524 98%),url('images/home-with-time.webp') 62% center/cover}
   .hero-inner{display:flex;flex-direction:column;gap:30px;padding-bottom:36px}.hero-copy{width:100%}.eyebrow{font-size:10px;letter-spacing:.075em}
-  h1{margin-top:16px;font-size:clamp(29px,8.2vw,44px);line-height:1.5;letter-spacing:0}h1>br:first-child{display:none}.mobile-break{display:block}
+  h1{margin-top:0;font-size:clamp(29px,8.2vw,44px);line-height:1.5;letter-spacing:0}h1>br:first-child{display:none}.mobile-break{display:block}
   .hero-core{margin-top:18px;font-size:13px}.hero-description{display:none}.hero-product{width:360px;order:1}.hero-product figcaption{margin-top:14px}.hero-actions{align-self:center;text-align:center}.hero-actions .store-row{margin-top:0}
   .store-row{gap:10px}.store-btn{min-width:0;padding:10px 13px;gap:8px}.store-btn svg{width:23px;height:28px}.store-btn b{font-size:18px}.store-btn small{font-size:7px}.store-note{font-size:10px}
   .hero-bottom{padding-block:21px;font-size:10px;letter-spacing:0}.hero-bottom a{gap:10px}.features{padding-top:65px}.section-heading{display:block}h2{font-size:32px}.section-heading>p{font-size:13px;margin-top:22px}
@@ -103,15 +104,13 @@ footer{border-top:1px solid var(--line);max-width:1440px;margin:auto;padding:42p
   .detail-link{font-size:11px;margin-top:16px}.app-capture{width:340px}.app-capture figcaption{margin-top:18px;font-size:11px}.app-capture figcaption span{font-size:9px}.release-note{font-size:10px;margin-bottom:17px}
   .world{min-height:670px;align-items:flex-end}.world>img{object-position:28% center}.world::before{background:linear-gradient(0deg,#0c1524 0%,#0c1524f0 25%,#0c1524b3 50%,#0c152420 85%,#0c152477)}.world-copy{margin:0;width:100%;padding:260px var(--side) 55px}
   .world-copy h2{font-size:clamp(25px,6.8vw,36px);margin-top:18px}.world-copy>p:not(.eyebrow){font-size:13px;margin-top:20px}.world-signature{font-size:11px;margin-top:26px}
-  .cta{min-height:0;display:block;text-align:center;padding:330px var(--side) 70px}.cta-photo{object-position:66% 30%;height:460px;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 90px,#000 300px,transparent);mask-image:linear-gradient(to bottom,transparent,#000 90px,#000 300px,transparent)}.cta::before{background:linear-gradient(0deg,#0c1524 38%,transparent 62%)}.cta::after{left:55%;top:200px;width:420px;height:340px}.cta-content{margin-inline:auto}.cta .store-row{justify-content:center}.cta h2{font-size:clamp(25px,7vw,34px);letter-spacing:0}.cta-content>p:not(.eyebrow):not(.store-note){font-size:13px}footer{grid-template-columns:1fr;gap:24px;padding-top:32px}.footer-links{font-size:10px;gap:18px}.footer-note{display:none}
+  .cta{min-height:0;display:block;text-align:center;padding:150px var(--side) 120px}.cta-photo{object-position:62% center;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 90px,#000 calc(100% - 90px),transparent);mask-image:linear-gradient(to bottom,transparent,#000 90px,#000 calc(100% - 90px),transparent)}.cta::before{background:radial-gradient(ellipse 75% 45% at 50% 48%,#0c1524a6,transparent 75%),linear-gradient(0deg,#0c1524 0%,transparent 25%)}.cta::after{left:60%;top:30%;width:420px;height:340px}.cta-content{text-shadow:0 2px 12px #071020e6,0 0 28px #07102099}.cta-content{margin-inline:auto}.cta .store-row{justify-content:center}.cta h2{font-size:clamp(25px,7vw,34px);letter-spacing:0}.cta-content>p:not(.eyebrow):not(.store-note){font-size:13px}footer{grid-template-columns:1fr;gap:24px;padding-top:32px}.footer-links{font-size:10px;gap:18px}.footer-note{display:none}
 }
 @media(max-width:360px){:root{--side:20px}.hero-core{font-size:12px}.store-btn{padding-inline:10px;gap:6px}.store-btn b{font-size:16px}.store-btn svg{width:21px}h3{font-size:26px}.feature-copy>p:not(.feature-label):not(.release-note),.cycle-copy>p:not(.eyebrow){font-size:13px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 
 /* The two supplied references retain their own composition. */
 :root{--serif:"Yu Mincho","YuMincho","Hiragino Mincho ProN",serif}
-
-
 
 
 
@@ -129,8 +128,9 @@ footer{border-top:1px solid var(--line);max-width:1440px;margin:auto;padding:42p
 .cycle-svg{width:100%;height:auto;display:block;overflow:visible}
 .cycle-svg .arc{fill:none;stroke:#f294418c;stroke-width:1}
 .cycle-svg .arrow{fill:none;stroke:#f2bc83;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
-.cycle-svg .node circle{fill:#26384ac2;stroke:#dceaf342;stroke-width:1}
-.cycle-svg .node text{font:20px var(--serif);letter-spacing:.08em;fill:var(--paper)}
+/* Opaque nodes let the orbiting light pass behind each word instead of over it. */
+.cycle-svg .node circle{fill:#1f3043;stroke:#dceaf342;stroke-width:1}
+.cycle-svg .node text{font:18px var(--serif);letter-spacing:.06em;fill:var(--paper)}
 .cycle-svg .orbit{transform-origin:200px 200px;animation:orbit 30s linear infinite}
 .cycle-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:56px;margin:60px auto 0;max-width:1400px;border-top:1px solid #dceaf324;padding-top:38px;counter-reset:cycle}
 .cycle-notes>div{counter-increment:cycle}
@@ -182,7 +182,6 @@ html:not(.motion-ready) .rising-lights i,html:not(.motion-ready) .cycle-svg .orb
 @media(max-width:760px){
 
 
-
   .screen-pair{gap:12px}.screen-pair figcaption{font-size:10px;margin-top:12px}.feature-pair h3{font-size:clamp(26px,7.5vw,40px)}
   .cycle{padding:40px 18px}.cycle-glass{padding:32px 22px}.cycle-layout{grid-template-columns:minmax(0,1fr);gap:28px}
   .cycle-head h2{font-size:30px;line-height:1.7;margin-top:22px}.cycle-head .eyebrow{font-size:10px}.cycle-head>.lead{font-size:13px;line-height:2.1}
@@ -212,6 +211,7 @@ html:not(.motion-ready) .rising-lights i,html:not(.motion-ready) .cycle-svg .orb
   .feature-living::before{-webkit-mask-image:linear-gradient(to bottom,transparent,#000 160px,#000 calc(100% - 160px),transparent);mask-image:linear-gradient(to bottom,transparent,#000 160px,#000 calc(100% - 160px),transparent)}
   .cycle{padding-bottom:75px}.world>img{-webkit-mask-image:linear-gradient(to bottom,transparent,#000 140px,#000 calc(100% - 80px),transparent);mask-image:linear-gradient(to bottom,transparent,#000 140px,#000 calc(100% - 80px),transparent)}
   .feature-label,.feature-index a{font-size:13px}.feature-footnote,.detail-link{font-size:13px}
+  .feature-index{display:grid;grid-template-columns:repeat(3,auto);justify-content:space-between;gap:4px 12px}
 }
 
 /* After the room, each scene keeps the night but changes its light: a lamp for memories, the blue before dawn for plans, a starry sky for the day's card. Edges fade so no band starts abruptly. */
@@ -224,7 +224,6 @@ html:not(.motion-ready) .rising-lights i,html:not(.motion-ready) .cycle-svg .orb
 @property --bloom{syntax:"<number>";inherits:false;initial-value:1}
 @keyframes scene-bloom{0%{opacity:0;--bloom:.35}40%,62%{opacity:1;--bloom:1}100%{opacity:0;--bloom:1.25}}
 @supports (animation-timeline:view()){@media(prefers-reduced-motion:no-preference){.feature-album,.feature-calendar,.feature-tarot{view-timeline:--scene block}.feature-album::before,.feature-calendar::before,.feature-tarot::before{animation:scene-bloom linear both;animation-timeline:--scene;animation-range:cover 0% cover 100%}}}
-
 
 @media(max-width:760px){.nav-download{font-size:13px}.hero{padding-top:104px}}
 
@@ -250,8 +249,9 @@ html:not(.motion-ready) .rising-lights i,html:not(.motion-ready) .cycle-svg .orb
 .tarot-phone{position:relative}
 .tarot-screen{position:absolute;left:5.774%;width:87.469%;top:15.225%;height:74.848%;container-type:inline-size;background:linear-gradient(#0d1f3c,#10294e 36.6%,#13305e 61%,#1a3d73)}
 .tarot-deck{position:absolute;inset:0;perspective:1400px}
-.tarot-card{position:absolute;top:11.23%;width:24.16%;aspect-ratio:2/3;padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:left .8s cubic-bezier(.2,.7,.2,1),top .8s cubic-bezier(.2,.7,.2,1),width .8s cubic-bezier(.2,.7,.2,1),opacity .5s,translate .3s}
-.tarot-card:nth-child(1){left:9.55%}.tarot-card:nth-child(2){left:37.92%}.tarot-card:nth-child(3){left:66.29%}
+.tarot-card{position:absolute;top:24%;width:27%;aspect-ratio:2/3;padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:left .8s cubic-bezier(.2,.7,.2,1),top .8s cubic-bezier(.2,.7,.2,1),width .8s cubic-bezier(.2,.7,.2,1),opacity .5s,translate .3s}
+/* Before the draw, the three cards sit a little larger and lower than in the app, so the waiting screen is not half empty. */
+.tarot-card:nth-child(1){left:5.5%}.tarot-card:nth-child(2){left:36.5%}.tarot-card:nth-child(3){left:67.5%}
 .tarot-card:focus-visible{outline:2px solid var(--glow);outline-offset:4px;border-radius:6px}
 .tarot-demo:not(.is-drawn) .tarot-card:hover,.tarot-demo:not(.is-drawn) .tarot-card:focus-visible{translate:0 -4%}
 .tarot-flip{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .8s .15s cubic-bezier(.3,.6,.2,1)}
@@ -261,7 +261,7 @@ html:not(.motion-ready) .rising-lights i,html:not(.motion-ready) .cycle-svg .orb
 .tarot-card.is-picked{left:28%;top:1%;width:44%;cursor:default}
 .tarot-card.is-picked .tarot-flip{transform:rotateY(180deg)}
 .is-drawn .tarot-card:not(.is-picked){opacity:0;translate:0 6%;pointer-events:none}
-.tarot-hint{position:absolute;top:46.9%;inset-inline:0;text-align:center;font-size:3.3cqw;letter-spacing:.08em;color:#d6dce6;transition:opacity .4s}
+.tarot-hint{position:absolute;top:58%;inset-inline:0;text-align:center;font-size:3.3cqw;letter-spacing:.08em;color:#d6dce6;transition:opacity .4s}
 .is-drawn .tarot-hint{opacity:0}
 .tarot-reading{position:absolute;top:41.5%;inset-inline:0;padding-inline:6.5%;text-align:center}
 .tarot-name{font-size:5.4cqw;letter-spacing:.08em;color:var(--paper)}
