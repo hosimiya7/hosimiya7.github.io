@@ -19,18 +19,19 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--glow);outline-offse
 
 .eyebrow{display:flex;align-items:center;gap:10px;color:var(--glow);font-size:12px;font-weight:500;letter-spacing:.1em;line-height:1.8}
 .light-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);box-shadow:0 0 14px #f2944180;flex:none}
-.hero{position:relative;isolation:isolate;overflow:hidden;padding:154px var(--side) 0}
+.hero{position:relative;isolation:isolate;overflow:hidden;padding:116px var(--side) 0}
 .hero-room{position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#0c1524 5%,#0c1524ef 35%,#0c1524b3 73%,#0c152499),linear-gradient(0deg,#0c1524,transparent 45%),url('images/home-with-time.webp') center/cover}
 
-.hero-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1.1fr 1fr;column-gap:55px;align-items:center;padding-bottom:45px}
-.hero-copy{grid-column:1;grid-row:1;align-self:end}
+.hero-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr auto auto 1fr;column-gap:55px;align-items:center;padding-bottom:45px}
+.hero-copy{grid-column:1;grid-row:2}
 h1{margin-top:26px;font-size:clamp(42px,3.65vw,56px);line-height:1.5;letter-spacing:.01em}h1 em{font-style:normal;color:var(--glow);white-space:nowrap}.mobile-break{display:none}
 .hero-core{font-size:17px;margin-top:30px;line-height:1.9}.hero-description{color:var(--muted);font-size:14px;line-height:2;margin-top:16px}
-.hero-product{grid-column:2;grid-row:1/3;justify-self:center;width:390px;max-width:100%}
+/* The phone fits under the fixed header on common laptop heights; the copy centers on it. */
+.hero-product{grid-column:2;grid-row:1/5;justify-self:center;width:clamp(290px,calc((100svh - 160px) / 2.05),390px);max-width:100%}
 .screen-image{display:block}.screen-image img{width:100%;filter:drop-shadow(0 22px 28px #02070f55)}
 .hero-product figcaption,.app-capture figcaption{font-size:12px;text-align:center;margin-top:20px;line-height:1.8;color:#d4d9df}
 .hero-product figcaption small,.app-capture figcaption span{display:block;font-size:10px;color:#a9b3c2;margin-top:5px}
-.hero-actions{grid-column:1;grid-row:2;align-self:start}
+.hero-actions{grid-column:1;grid-row:3}
 .store-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 .store-btn{display:flex;align-items:center;gap:10px;border:1px solid #fff8e86b;background:#0b1321;border-radius:9px;padding:11px 18px;min-width:168px;transition:background .2s,border-color .2s}
 .store-btn:hover{border-color:var(--glow);background:#223046}.store-btn svg{width:26px;height:30px;fill:var(--paper);flex:none}.store-btn span{display:flex;flex-direction:column}
@@ -72,13 +73,18 @@ h3{font-size:clamp(32px,3.15vw,45px);line-height:1.55}
 
 .world-copy{width:53%;margin-left:47%;padding:90px var(--side) 90px 20px}.world-copy h2{margin-top:24px;font-size:clamp(30px,2.8vw,41px);line-height:1.7}
 .world-copy>p:not(.eyebrow){font-size:15px;line-height:2.2;color:#d1d6dd;margin-top:26px}.world-signature{display:block;font-size:12px;letter-spacing:.1em;color:var(--glow);margin-top:35px}
-.cta{text-align:center;padding-block:110px}.cta .eyebrow{justify-content:center}.cta h2{margin-top:20px}.cta-content>p:not(.eyebrow):not(.store-note){margin-top:24px;color:var(--muted);font-size:15px;line-height:2}.cta .store-row{justify-content:center}
+/* The last invitation stands in a lit entrance: copy sits over the shaded shoe cabinet, the hallway leads on to its right. */
+.cta{position:relative;isolation:isolate;overflow:hidden;max-width:none;min-height:640px;display:flex;align-items:center;padding:150px max(var(--side),calc((100vw - 1120px)/2)) 130px}
+.cta-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;z-index:-3;filter:brightness(1.32) saturate(1.05);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 180px);mask-image:linear-gradient(to bottom,transparent,#000 180px)}
+.cta::before{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(90deg,#0c1524c7 0%,#0c152480 32%,#0c15241a 54%,transparent 66%),linear-gradient(0deg,#0c1524,transparent 26%)}
+.cta::after{content:"";position:absolute;z-index:-1;pointer-events:none;left:66%;top:45%;width:760px;height:600px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,#ffc57a24,transparent)}
+.cta-content{max-width:640px;text-shadow:0 2px 14px #07102099}.cta h2{margin-top:0;word-break:keep-all;overflow-wrap:anywhere}.cta-content>p:not(.eyebrow):not(.store-note){margin-top:24px;color:#d7dce3;font-size:15px;line-height:2}
 footer{border-top:1px solid var(--line);max-width:1440px;margin:auto;padding:42px var(--side) 32px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}
 .footer-brand .brand-wordmark{width:130px}.footer-links{display:flex;flex-wrap:wrap;gap:24px;color:var(--muted);font-size:11px}.copyright,.footer-note{color:var(--muted);font-size:10px;letter-spacing:.05em}.footer-note{text-align:right}
 .page-hidden *,.page-hidden *::before,.page-hidden *::after{animation-play-state:paused!important}
 @media(min-width:1600px){.hero-room{background-position:center 58%}}
 @media(max-width:1100px){
-  .hero-inner{column-gap:35px;grid-template-columns:1.12fr 1fr}h1{font-size:45px}.hero-product{width:370px}.hero-core{font-size:15px}.hero-description{font-size:13px}
+  .hero-inner{column-gap:35px;grid-template-columns:1.12fr 1fr}h1{font-size:45px}.hero-product{width:clamp(290px,calc((100svh - 160px) / 2.05),370px)}.hero-core{font-size:15px}.hero-description{font-size:13px}
   .store-btn{min-width:146px;padding-inline:12px}.store-btn b{font-size:18px}.feature{gap:45px}h3{font-size:32px}.feature-copy>p:not(.feature-label):not(.release-note){font-size:14px}.section-heading>p{font-size:12px}
 }
 @media(max-width:760px){
@@ -86,7 +92,7 @@ footer{border-top:1px solid var(--line);max-width:1440px;margin:auto;padding:42p
   .hero{padding-top:124px}.hero-room{background:linear-gradient(#0c1524f5 10%,#0c1524cb 35%,#0c152480 60%,#0c1524 98%),url('images/home-with-time.webp') 62% center/cover}
   .hero-inner{display:flex;flex-direction:column;gap:30px;padding-bottom:36px}.hero-copy{width:100%}.eyebrow{font-size:10px;letter-spacing:.075em}
   h1{margin-top:16px;font-size:clamp(29px,8.2vw,44px);line-height:1.5;letter-spacing:0}h1>br:first-child{display:none}.mobile-break{display:block}
-  .hero-core{margin-top:18px;font-size:13px}.hero-description{display:none}.hero-product{width:360px}.hero-product figcaption{margin-top:14px}.hero-actions{align-self:center;text-align:center}.hero-actions .store-row{margin-top:0}
+  .hero-core{margin-top:18px;font-size:13px}.hero-description{display:none}.hero-product{width:360px;order:1}.hero-product figcaption{margin-top:14px}.hero-actions{align-self:center;text-align:center}.hero-actions .store-row{margin-top:0}
   .store-row{gap:10px}.store-btn{min-width:0;padding:10px 13px;gap:8px}.store-btn svg{width:23px;height:28px}.store-btn b{font-size:18px}.store-btn small{font-size:7px}.store-note{font-size:10px}
   .hero-bottom{padding-block:21px;font-size:10px;letter-spacing:0}.hero-bottom a{gap:10px}.features{padding-top:65px}.section-heading{display:block}h2{font-size:32px}.section-heading>p{font-size:13px;margin-top:22px}
   .feature-index{justify-content:flex-start;gap:8px 23px;padding-block:16px;margin-top:30px}.feature-index a{font-size:11px;gap:8px}.screens-note{font-size:9px;margin-bottom:10px}
@@ -97,7 +103,7 @@ footer{border-top:1px solid var(--line);max-width:1440px;margin:auto;padding:42p
   .detail-link{font-size:11px;margin-top:16px}.app-capture{width:340px}.app-capture figcaption{margin-top:18px;font-size:11px}.app-capture figcaption span{font-size:9px}.release-note{font-size:10px;margin-bottom:17px}
   .world{min-height:670px;align-items:flex-end}.world>img{object-position:28% center}.world::before{background:linear-gradient(0deg,#0c1524 0%,#0c1524f0 25%,#0c1524b3 50%,#0c152420 85%,#0c152477)}.world-copy{margin:0;width:100%;padding:260px var(--side) 55px}
   .world-copy h2{font-size:clamp(25px,6.8vw,36px);margin-top:18px}.world-copy>p:not(.eyebrow){font-size:13px;margin-top:20px}.world-signature{font-size:11px;margin-top:26px}
-  .cta{padding-block:70px}.cta h2{font-size:clamp(25px,7vw,34px);letter-spacing:0}.cta-content>p:not(.eyebrow):not(.store-note){font-size:13px}footer{grid-template-columns:1fr;gap:24px;padding-top:32px}.footer-links{font-size:10px;gap:18px}.footer-note{display:none}
+  .cta{min-height:0;display:block;text-align:center;padding:330px var(--side) 70px}.cta-photo{object-position:66% 30%;height:460px;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 90px,#000 300px,transparent);mask-image:linear-gradient(to bottom,transparent,#000 90px,#000 300px,transparent)}.cta::before{background:linear-gradient(0deg,#0c1524 38%,transparent 62%)}.cta::after{left:55%;top:200px;width:420px;height:340px}.cta-content{margin-inline:auto}.cta .store-row{justify-content:center}.cta h2{font-size:clamp(25px,7vw,34px);letter-spacing:0}.cta-content>p:not(.eyebrow):not(.store-note){font-size:13px}footer{grid-template-columns:1fr;gap:24px;padding-top:32px}.footer-links{font-size:10px;gap:18px}.footer-note{display:none}
 }
 @media(max-width:360px){:root{--side:20px}.hero-core{font-size:12px}.store-btn{padding-inline:10px;gap:6px}.store-btn b{font-size:16px}.store-btn svg{width:21px}h3{font-size:26px}.feature-copy>p:not(.feature-label):not(.release-note),.cycle-copy>p:not(.eyebrow){font-size:13px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
@@ -208,7 +214,16 @@ html:not(.motion-ready) .rising-lights i,html:not(.motion-ready) .cycle-svg .orb
   .feature-label,.feature-index a{font-size:13px}.feature-footnote,.detail-link{font-size:13px}
 }
 
-/* Plain night backgrounds keep the feature UI in focus. */
+/* After the room, each scene keeps the night but changes its light: a lamp for memories, the blue before dawn for plans, a starry sky for the day's card. Edges fade so no band starts abruptly. */
+.feature-album::before,.feature-calendar::before,.feature-tarot::before{content:"";position:absolute;z-index:-2;inset:0;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 200px,#000 calc(100% - 200px),transparent);mask-image:linear-gradient(to bottom,transparent,#000 200px,#000 calc(100% - 200px),transparent)}
+.feature-album::before{background:radial-gradient(ellipse calc(36% * var(--bloom)) calc(60% * var(--bloom)) at 26% 50%,#f2944140,transparent 70%),radial-gradient(ellipse calc(42% * var(--bloom)) calc(48% * var(--bloom)) at 74% 50%,#fcebba17,transparent 70%),linear-gradient(90deg,#221c24,#1a1a26 55%,#121827)}
+.feature-calendar::before{background:radial-gradient(ellipse calc(55% * var(--bloom)) calc(60% * var(--bloom)) at 70% 38%,#4f86b830,transparent 70%),radial-gradient(ellipse calc(35% * var(--bloom)) calc(45% * var(--bloom)) at 12% 70%,#7fb2d414,transparent 70%),linear-gradient(180deg,#0f1c2e,#132a42 55%,#0f1c2e)}
+.feature-tarot::before{background:radial-gradient(circle 1.4px at 8% 14%,#fff8ebd9 60%,transparent),radial-gradient(circle 1px at 17% 31%,#fff8eb99 60%,transparent),radial-gradient(circle 1.6px at 29% 9%,#fcebbacc 60%,transparent),radial-gradient(circle 1px at 38% 24%,#fff8eb80 60%,transparent),radial-gradient(circle 1.2px at 45% 78%,#fff8eb99 60%,transparent),radial-gradient(circle 1px at 6% 62%,#fff8eb80 60%,transparent),radial-gradient(circle 1.5px at 22% 88%,#fcebbab3 60%,transparent),radial-gradient(circle 1px at 51% 12%,#fff8eb99 60%,transparent),radial-gradient(circle 1.3px at 90% 11%,#fff8ebb3 60%,transparent),radial-gradient(circle 1px at 95% 44%,#fff8eb80 60%,transparent),radial-gradient(circle 1.6px at 88% 84%,#fcebbacc 60%,transparent),radial-gradient(circle 1px at 58% 91%,#fff8eb80 60%,transparent),radial-gradient(circle 1.2px at 34% 54%,#fff8eb66 60%,transparent),radial-gradient(ellipse calc(34% * var(--bloom)) calc(52% * var(--bloom)) at 71% 50%,#8e7bd62e,transparent 70%),radial-gradient(ellipse calc(40% * var(--bloom)) calc(40% * var(--bloom)) at 22% 30%,#4f6fb81c,transparent 70%),linear-gradient(180deg,#0e1428,#131a3a 55%,#0e1428)}
+/* Where scrolling can drive it, the light seeps in as a scene arrives and thins out as it leaves.
+   The timeline is named on the section: its overflow:hidden would otherwise make view() track the section, not the page. */
+@property --bloom{syntax:"<number>";inherits:false;initial-value:1}
+@keyframes scene-bloom{0%{opacity:0;--bloom:.35}40%,62%{opacity:1;--bloom:1}100%{opacity:0;--bloom:1.25}}
+@supports (animation-timeline:view()){@media(prefers-reduced-motion:no-preference){.feature-album,.feature-calendar,.feature-tarot{view-timeline:--scene block}.feature-album::before,.feature-calendar::before,.feature-tarot::before{animation:scene-bloom linear both;animation-timeline:--scene;animation-range:cover 0% cover 100%}}}
 
 
 @media(max-width:760px){.nav-download{font-size:13px}.hero{padding-top:104px}}
