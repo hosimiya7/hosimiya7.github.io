@@ -30,8 +30,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--glow);outline-offse
 h1{margin-top:0;font-size:clamp(42px,3.65vw,56px);line-height:1.5;letter-spacing:.01em}h1 em{font-style:normal;color:var(--glow);white-space:nowrap}.mobile-break{display:none}
 .hero-core{font-size:17px;margin-top:30px;line-height:1.9}.hero-description{color:var(--muted);font-size:14px;line-height:2;margin-top:16px}
 /* The phone fits under the fixed header on common laptop heights; the copy centers on it. */
-.hero-product{grid-column:2;grid-row:1/5;justify-self:center;width:clamp(290px,calc((100svh - 160px) / 2.05),390px);max-width:100%}
-.screen-image{display:block}.screen-image img{width:100%;filter:drop-shadow(0 22px 28px #02070f55)}
+.hero-product{grid-column:2;grid-row:1/5;justify-self:center;width:clamp(280px,calc((100svh - 160px) / 2.1),390px);max-width:100%}
+/* Every capture is the bare screen; one thin frame without a camera is drawn around it, so no phone model is implied.
+   The frame sits in the margin, so a figure keeps its width; overlays are placed in the screen's own proportions. */
+.hero-product,.app-capture{container-type:inline-size}
+.screen-image{position:relative;display:block;margin:2.6cqw;border-radius:10.5cqw;overflow:hidden;background:#0a1626;box-shadow:0 0 0 2.6cqw #070b12,0 0 0 calc(2.6cqw + 1px) #e8eef724,0 24px 34px 2.6cqw #02070f59}
+.screen-image img{display:block;width:100%;height:auto}
 .hero-product figcaption,.app-capture figcaption{font-size:12px;text-align:center;margin-top:20px;line-height:1.8;color:#d4d9df}
 .hero-product figcaption small,.app-capture figcaption span{display:block;font-size:10px;color:#a9b3c2;margin-top:5px}
 .hero-actions{grid-column:1;grid-row:3}
@@ -85,7 +89,7 @@ footer{border-top:1px solid var(--line);max-width:1440px;margin:auto;padding:42p
 .page-hidden *,.page-hidden *::before,.page-hidden *::after{animation-play-state:paused!important}
 @media(min-width:1600px){.hero-room{background-position:center 58%}}
 @media(max-width:1100px){
-  .hero-inner{column-gap:35px;grid-template-columns:1.12fr 1fr}h1{font-size:45px}.hero-product{width:clamp(290px,calc((100svh - 160px) / 2.05),370px)}.hero-core{font-size:15px}.hero-description{font-size:13px}
+  .hero-inner{column-gap:35px;grid-template-columns:1.12fr 1fr}h1{font-size:45px}.hero-product{width:clamp(280px,calc((100svh - 160px) / 2.1),370px)}.hero-core{font-size:15px}.hero-description{font-size:13px}
   .store-btn{min-width:146px;padding-inline:12px}.store-btn b{font-size:18px}.feature{gap:45px}h3{font-size:clamp(28px,3.9vw,32px)}.feature-copy>p:not(.feature-label):not(.release-note){font-size:14px}.section-heading>p{font-size:12px}
 }
 @media(max-width:760px){
@@ -144,8 +148,6 @@ footer{border-top:1px solid var(--line);max-width:1440px;margin:auto;padding:42p
 .feature-pair h3{font-size:clamp(28px,2.65vw,42px)}
 .screen-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:24px}
 .screen-pair .app-capture{width:100%;max-width:350px;justify-self:center}
-.screen-pair .screen-image{aspect-ratio:1/2.075;display:flex;align-items:center}
-.screen-pair img{width:100%;height:100%;object-fit:contain}
 .screen-pair figcaption{font-size:12px;margin-top:16px;line-height:1.8}
 
 /* Let the room read as a warm, lived-in place. Shade is concentrated under copy. */
@@ -247,7 +249,7 @@ html:not(.motion-ready) .rising-lights i,html:not(.motion-ready) .cycle-svg .orb
 /* 今日の一枚 can be drawn on the page. The app's own choice screen is the frame; the screen area
    below its title is live, laid out in the app's proportions and sized to the phone (cqw). */
 .tarot-phone{position:relative}
-.tarot-screen{position:absolute;left:5.774%;width:87.469%;top:15.225%;height:74.848%;container-type:inline-size;background:linear-gradient(#0d1f3c,#10294e 36.6%,#13305e 61%,#1a3d73)}
+.tarot-screen{position:absolute;left:0;width:100%;top:14.609%;height:79.444%;container-type:inline-size;background:linear-gradient(#0d1f3c,#10294e 36.6%,#13305e 61%,#1a3d73)}
 .tarot-deck{position:absolute;inset:0;perspective:1400px}
 .tarot-card{position:absolute;top:24%;width:27%;aspect-ratio:2/3;padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:left .8s cubic-bezier(.2,.7,.2,1),top .8s cubic-bezier(.2,.7,.2,1),width .8s cubic-bezier(.2,.7,.2,1),opacity .5s,translate .3s}
 /* Before the draw, the three cards sit a little larger and lower than in the app, so the waiting screen is not half empty. */
@@ -284,7 +286,7 @@ html:not(.motion-ready) .rising-lights i,html:not(.motion-ready) .cycle-svg .orb
    The list is laid over the screenshot's message area in the app's proportions (cqw of the screen),
    and new messages push the log up as they would in the app. It ends on the screenshot's view. */
 .hero-product .screen-image{position:relative}
-.chat-live{display:none;position:absolute;left:5.229%;width:88.889%;top:12.548%;height:69.236%;overflow-y:auto;scrollbar-width:none;user-select:none;-webkit-user-select:none;cursor:grab;container-type:inline-size;background:linear-gradient(#0a1626,#0d1f38 37%,#132d4f 74%,#16355f)}
+.chat-live{display:none;position:absolute;left:0;width:100%;top:9.301%;height:73.795%;overflow-y:auto;scrollbar-width:none;user-select:none;-webkit-user-select:none;cursor:grab;container-type:inline-size;background:linear-gradient(#0a1626,#0d1f38 37%,#132d4f 74%,#16355f)}
 .chat-ready .chat-live{display:block}
 .chat-live::-webkit-scrollbar{display:none}.chat-live.is-dragging{cursor:grabbing}
 .chat-log{display:flex;flex-direction:column;justify-content:flex-end;min-height:100%;padding:2cqw 0 .3cqw}
@@ -309,7 +311,7 @@ html:not(.motion-ready) .rising-lights i,html:not(.motion-ready) .cycle-svg .orb
    the cards and the detail sheet are live, measured from the app's screens (cqw of the screen).
    Hiding a memory greys the card's stripe and ribbon and dims its title; the sheet keeps its colour. */
 .album-demo .screen-image{position:relative}
-.album-screen{display:none;position:absolute;left:5.514%;width:88.095%;top:2.74%;height:89.664%;overflow:hidden;container-type:inline-size;border-radius:5cqw 5cqw 0 0}
+.album-screen{display:none;position:absolute;left:0;width:100%;top:.459%;height:94.426%;overflow:hidden;container-type:inline-size;border-radius:5cqw 5cqw 0 0}
 .album-demo.is-ready .album-screen{display:block}
 .album-list{position:absolute;top:50.07cqw;left:15.79cqw;right:0;bottom:0;overflow-y:auto;scrollbar-width:none;padding-bottom:2cqw;user-select:none;-webkit-user-select:none;background:linear-gradient(#071a30,#09213b 37%,#0b2541 55%,#0e2947 74%,#0d2a4c)}
 .album-list::-webkit-scrollbar{display:none}.album-list.is-dragging{cursor:grabbing}
