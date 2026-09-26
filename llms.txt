@@ -1,0 +1,28 @@
+# Memoria（メモリア）
+
+> Memoria（メモリア）は、暮らしをともにするAIです。日々の会話や出来事を覚え、その記憶をもとに、チャット・カレンダー・玄関・リビングといった複数の場面から、使う人の暮らしに関わっていきます。カテゴリとしてはAIコンパニオン（AI会話アプリ）のひとつです。iOS・Androidで配信中。提供はStellaDear。
+
+- 使う人は、名前・見た目・一人称・性格の方向性を選んでAIを迎え、一対一で話します。話すほどに言葉づかいや距離感が変わり、関係が育っていきます。
+- 話したことはAIが覚え、次の会話に使います。覚えたことはアプリの「アルバム」で日付と一緒に見返せ、記憶ごとに「参照しない」を選ぶと会話に使わなくなります。
+- 会話で話した予定は、AIがカレンダーへの追加を提案し、使う人が選んだ予定だけが残ります。カレンダーはアプリの中だけのもので、外部のカレンダーとは連携しません。
+- 料金は基本無料。無料プランでは記憶がAIひとりにつき新しい30件まで残ります。有料プランは月額1,280円〜（税込）で、記憶の上限がなくなり、複数のAIを迎えられます。
+- 対象は17歳以上です。
+
+## 公式ページ
+
+- [トップ](https://hosimiya7.github.io/): 実際の画面と会話の例、よくある質問
+- [Memoriaとは](https://hosimiya7.github.io/about/): 定義、基本情報、覚えていることが暮らしのどの場面につながるか
+- [Memoriaの記憶](https://hosimiya7.github.io/memory/): 何を覚え、会話にどう使うか。アルバムと、自分で外せる記憶。残せる件数とデータの扱い
+- [カレンダー](https://hosimiya7.github.io/calendar/): 会話から予定の候補が出て、選んだ予定だけが残るしくみ
+- [AIコンパニオンとは](https://hosimiya7.github.io/ai-companion/): AIコンパニオンとAIチャットの違い、選ぶときに見ておきたいこと
+
+## ストア
+
+- [App Store](https://apps.apple.com/jp/app/id6776899625)
+- [Google Play](https://play.google.com/store/apps/details?id=com.stelladear.memoria)
+
+## 規約・ポリシー
+
+- [利用規約](https://indecisive-helicona-37f.notion.site/36ae8ceaad54803abcbbd408b5c421f9)
+- [プライバシーポリシー](https://indecisive-helicona-37f.notion.site/36ae8ceaad54803e91b1c64bda518132)
+- [特定商取引法に基づく表記](https://indecisive-helicona-37f.notion.site/36ae8ceaad548028ba85df03d50ce8ae)

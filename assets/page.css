@@ -1,0 +1,141 @@
+/* Subpages (about, memory, calendar, ai-companion): reading pages that share the LP's night, header, frame and store buttons.
+   Tokens mirror site.css; the LP's scroll scenes are not loaded here. Text is plain HTML, so no script is needed. */
+:root{--night:#0c1524;--paper:#fff8eb;--muted:#bcc4cf;--amber:#f29441;--glow:#fcebba;--line:#fff0cf26;--panel:#fff8eb08;--sans:"Zen Kaku Gothic New","Yu Gothic",sans-serif;--side:clamp(24px,6vw,100px)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--night);color:var(--paper);font-family:var(--sans);scroll-padding-top:96px}
+body{-webkit-font-smoothing:antialiased;background:var(--night)}
+::selection{background:var(--glow);color:var(--night)}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%;height:auto}ul,ol{list-style:none}
+h1,h2,h3{font-weight:500;letter-spacing:.015em;text-wrap:balance}
+/* Same rule as the LP: short copy breaks only at punctuation, spaces and <wbr>. */
+h1,h2,h3,dt,th,.lead,.page-crumbs,.scene b,.related a b{word-break:keep-all;overflow-wrap:anywhere}
+p,dd,li,td{text-wrap:pretty}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--glow);outline-offset:6px}
+.skip-link{position:fixed;top:12px;left:12px;z-index:100;padding:12px 20px;background:var(--paper);color:var(--night);transform:translateY(-180%)}
+.skip-link:focus{transform:none}
+
+.site-header{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px var(--side);background:#0c1524e6;border-bottom:1px solid #fff0cf14;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.brand{display:flex;align-items:center;min-height:44px}.brand-wordmark{width:136px}
+.header-nav{display:flex;align-items:center;gap:30px;font-size:14px;font-weight:500}
+.header-nav a{padding-block:10px}.header-nav a:hover,.header-nav a[aria-current="page"]{color:var(--glow)}
+.nav-download{border-bottom:1px solid #fcebba77}
+
+/* Opening: breadcrumbs, the page's own h1 and the defining sentence, over a faint glow of the LP's room. */
+.page-hero{position:relative;isolation:isolate;overflow:hidden;padding:72px var(--side) 64px;border-bottom:1px solid var(--line)}
+.page-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#0c1524 30%,#0c1524d9 60%,#0c1524a6),linear-gradient(0deg,#0c1524,transparent 60%),url('images/home-with-time.webp') 70% 40%/cover;opacity:.9}
+.page-hero-inner,.page-body{max-width:880px;margin-inline:auto}
+.page-crumbs{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted);letter-spacing:.05em}
+.page-crumbs li+li::before{content:"/";margin-right:8px;color:#fff0cf55}
+.page-crumbs a:hover{color:var(--glow)}
+.page-hero h1{margin-top:28px;font-size:clamp(32px,4.4vw,48px);line-height:1.5}
+.page-hero h1 em{font-style:normal;color:var(--glow)}
+.lead{margin-top:26px;font-size:17px;line-height:2;color:var(--paper);max-width:720px}
+.lead+.lead{margin-top:12px;font-size:15px;color:var(--muted)}
+
+.page-body{padding:24px var(--side) 40px;box-sizing:content-box}
+.page-section{padding-block:56px;border-bottom:1px solid #fff0cf14}
+.page-section:last-child{border-bottom:0}
+.page-section h2{font-size:clamp(25px,2.8vw,32px);line-height:1.6}
+.page-section h3{font-size:18px;line-height:1.7;margin-top:36px;color:var(--glow)}
+.page-section p,.page-section li{font-size:15px;line-height:2.1;color:var(--muted)}
+.page-section>*+*{margin-top:22px}
+.page-section p+p{margin-top:14px}
+.page-section h3+p{margin-top:10px}
+.page-section strong{color:var(--paper);font-weight:500}
+.page-section p a,.page-section li a,.page-section td a{color:var(--paper);text-decoration:underline;text-decoration-color:#fcebba66;text-underline-offset:4px}
+.page-section p a:hover,.page-section li a:hover,.page-section td a:hover{color:var(--glow)}
+.bullets{margin-top:16px}.bullets li{position:relative;padding-left:22px}.bullets li+li{margin-top:6px}
+.bullets li::before{content:"✧";position:absolute;left:0;color:var(--amber);font-size:11px;top:.35em}
+.note{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-size:12px!important;line-height:1.9!important}
+
+/* The one defining statement a page stands on. */
+.definition{margin-top:26px;padding:26px 30px;border-left:2px solid var(--amber);background:var(--panel);border-radius:0 12px 12px 0}
+.definition p{font-size:17px!important;line-height:2!important;color:var(--paper)!important}
+.definition p+p{margin-top:10px}.definition .definition-name{font-size:21px!important;color:var(--glow)!important;word-break:keep-all;overflow-wrap:anywhere}
+
+/* Facts at a glance, readable as a list by people and by crawlers. */
+.facts{display:grid;grid-template-columns:auto 1fr;gap:0;border-top:1px solid var(--line)}
+.facts dt,.facts dd{padding:16px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.9}
+.facts dt{color:var(--glow);padding-right:32px;white-space:nowrap}
+.facts dd{color:var(--muted)}
+
+/* A spoken example, set like a short exchange rather than a screenshot. */
+.talk{margin-top:26px;display:grid;gap:12px}
+.talk li{display:grid;grid-template-columns:7.5em 1fr;gap:16px;align-items:baseline;padding:14px 20px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.talk li>span{font-size:12px!important;color:var(--amber);letter-spacing:.05em;line-height:1.9}
+.talk li>q{quotes:"「" "」";color:var(--paper);font-size:15px;line-height:1.9}
+
+/* The scenes the child reaches into; each links to its own page when there is one. */
+.scenes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.scene{display:block;padding:22px 24px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.scene b{display:block;font-weight:500;font-size:17px;line-height:1.7;color:var(--paper)}
+.scene span{display:block;margin-top:8px;font-size:13px;line-height:1.9;color:var(--muted)}
+a.scene{transition:border-color .2s,background .2s}a.scene:hover{border-color:#fcebba77;background:#fff8eb0f}
+a.scene b::after{content:" →";color:var(--amber)}
+
+/* The cycle, as an ordered list that wraps back to its start. */
+.cycle-list{counter-reset:step;display:flex;flex-wrap:wrap;gap:10px 0;margin-top:26px}
+.cycle-list li{counter-increment:step;display:flex;align-items:center;font-size:14px!important;color:var(--paper)!important}
+.cycle-list li:not(:last-child)::after{content:"→";margin-inline:12px;color:var(--amber)}
+.cycle-list li:last-child::after{content:"↺";margin-left:12px;color:var(--amber)}
+
+/* Text beside a real screen; the screen drops below on phones. */
+.split{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:48px;align-items:start}
+.split-copy>*+*{margin-top:14px}
+.split .app-capture{margin-top:6px}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,250px));justify-content:center;gap:28px;margin-top:34px}
+.app-capture{container-type:inline-size;width:100%}
+.screen-image{position:relative;display:block;margin:2.6cqw;border-radius:10.5cqw;overflow:hidden;background:#0a1626;box-shadow:0 0 0 2.6cqw #070b12,0 0 0 calc(2.6cqw + 1px) #e8eef724,0 24px 34px 2.6cqw #02070f59}
+.screen-image img{width:100%}
+.app-capture figcaption{margin-top:18px;font-size:12px;line-height:1.8;color:#c8cfd8;text-align:center}
+
+.table-wrap{overflow-x:auto;margin-top:22px}
+.compare{width:100%;border-collapse:collapse;font-size:14px;line-height:1.9}
+.compare th,.compare td{padding:14px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.compare thead th{color:var(--glow);font-weight:500;border-bottom-color:#fcebba55}
+.compare tbody th{color:var(--paper);font-weight:500;white-space:nowrap}
+.compare td{color:var(--muted)}
+.compare-wide{min-width:560px}
+
+.related{padding:56px var(--side);border-top:1px solid var(--line)}
+.related-inner{max-width:880px;margin-inline:auto}
+.related h2{font-size:15px;color:var(--glow);letter-spacing:.08em;font-weight:500}
+.related ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}
+.related a{display:block;height:100%;padding:18px 22px;border:1px solid var(--line);border-radius:12px;transition:border-color .2s}
+.related a:hover{border-color:#fcebba77}
+.related a b{display:block;font-weight:500;font-size:15px}.related a b::after{content:" →";color:var(--amber)}
+.related a span{display:block;margin-top:6px;font-size:12px;line-height:1.8;color:var(--muted)}
+
+.page-cta{position:relative;isolation:isolate;overflow:hidden;padding:88px var(--side);text-align:center}
+.page-cta::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 60% 70% at 50% 50%,#0c1524b3,#0c1524 80%),url('images/cta-window.webp') 70% center/cover;opacity:.85}
+.page-cta h2{font-size:clamp(24px,3vw,32px);line-height:1.6}
+.page-cta p{margin-top:16px;font-size:14px;line-height:2;color:#d7dce3}
+.store-row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:28px}
+.store-btn{display:flex;align-items:center;gap:10px;border:1px solid #fff8e86b;background:#0b1321;border-radius:9px;padding:11px 18px;min-width:168px;text-align:left;transition:background .2s,border-color .2s}
+.store-btn:hover{border-color:var(--glow);background:#223046}.store-btn svg{width:26px;height:30px;fill:var(--paper);flex:none}.store-btn span{display:flex;flex-direction:column}
+.store-btn small{font-size:8px;letter-spacing:.07em;line-height:1.4}.store-btn b{font-family:Arial,sans-serif;font-size:20px;line-height:1.3;font-weight:500}
+
+/* Brand on the left; subpage links above the legal links on the right; copyright last. */
+footer{border-top:1px solid var(--line);max-width:1440px;margin:auto;padding:42px var(--side) 32px;display:grid;grid-template-columns:1fr auto;gap:18px 30px;align-items:start}
+.footer-brand{grid-row:1/3}.footer-links{justify-content:flex-end}.copyright{grid-column:1/-1;margin-top:8px}
+.footer-brand .brand-wordmark{width:130px}
+.footer-links{display:flex;flex-wrap:wrap;gap:12px 24px;color:var(--muted);font-size:12px}.footer-links a:hover{color:var(--glow)}
+.footer-site .footer-links{color:var(--paper)}
+.copyright{color:var(--muted);font-size:12px;letter-spacing:.05em}
+
+@media(max-width:760px){
+  :root{--side:20px}
+  .site-header{padding-block:10px;gap:16px}.brand-wordmark{width:112px}
+  .header-nav{gap:18px;font-size:12px}.header-nav a:not(.nav-download){display:none}
+  .page-hero{padding-block:44px 40px}.page-hero h1{margin-top:20px}.lead{font-size:15px}
+  .page-section{padding-block:44px}.page-section p,.page-section li{font-size:14px}
+  .definition{padding:20px 20px}.definition p{font-size:15px!important}.definition .definition-name{font-size:18px!important}
+  .facts{grid-template-columns:1fr}.facts dt{padding-bottom:0;border-bottom:0}.facts dd{padding-top:4px}
+  .talk li{grid-template-columns:1fr;gap:2px;padding:12px 16px}
+  .scenes,.related ul{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr;gap:28px}.split .app-capture{max-width:260px;margin-inline:auto}
+  .compare th,.compare td{padding:12px 10px}.compare tbody th{white-space:normal;min-width:6em}
+  .pair{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  footer{grid-template-columns:1fr;gap:20px}.footer-brand{grid-row:auto}.footer-links{justify-content:flex-start}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
