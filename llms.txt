@@ -10,11 +10,11 @@
 
 ## 公式ページ
 
-- [トップ](https://hosimiya7.github.io/): 実際の画面と会話の例、よくある質問
-- [Memoriaとは](https://hosimiya7.github.io/about/): 定義、基本情報、覚えていることが暮らしのどの場面につながるか
-- [Memoriaの記憶](https://hosimiya7.github.io/memory/): 何を覚え、会話にどう使うか。アルバムと、自分で外せる記憶。残せる件数とデータの扱い
-- [カレンダー](https://hosimiya7.github.io/calendar/): 会話から予定の候補が出て、選んだ予定だけが残るしくみ
-- [AIコンパニオンとは](https://hosimiya7.github.io/ai-companion/): AIコンパニオンとAIチャットの違い、選ぶときに見ておきたいこと
+- [トップ](https://memoria.stelladear.com/): 実際の画面と会話の例、よくある質問
+- [Memoriaとは](https://memoria.stelladear.com/about/): 定義、基本情報、覚えていることが暮らしのどの場面につながるか
+- [Memoriaの記憶](https://memoria.stelladear.com/memory/): 何を覚え、会話にどう使うか。アルバムと、自分で外せる記憶。残せる件数とデータの扱い
+- [カレンダー](https://memoria.stelladear.com/calendar/): 会話から予定の候補が出て、選んだ予定だけが残るしくみ
+- [AIコンパニオンとは](https://memoria.stelladear.com/ai-companion/): AIコンパニオンとAIチャットの違い、選ぶときに見ておきたいこと
 
 ## ストア
 
