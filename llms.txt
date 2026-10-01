@@ -23,6 +23,6 @@
 
 ## 規約・ポリシー
 
-- [利用規約](https://indecisive-helicona-37f.notion.site/36ae8ceaad54803abcbbd408b5c421f9)
-- [プライバシーポリシー](https://indecisive-helicona-37f.notion.site/36ae8ceaad54803e91b1c64bda518132)
-- [特定商取引法に基づく表記](https://indecisive-helicona-37f.notion.site/36ae8ceaad548028ba85df03d50ce8ae)
+- [利用規約](https://memoria.stelladear.com/terms/)
+- [プライバシーポリシー](https://memoria.stelladear.com/privacy/)
+- [特定商取引法に基づく表記](https://memoria.stelladear.com/tokushoho/)
