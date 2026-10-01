@@ -35,7 +35,7 @@ function body(text, headingTag) {
   const html = [];
   const blocks = text.split(/\n{2,}/).map((b) => b.trim()).filter(Boolean);
   for (const block of blocks) {
-    if (/^-{3,}$/.test(block) || /^\*(最終更新|Last updated)/.test(block)) continue;
+    if (/^(-{3,}\s*)+$/.test(block) || /^\*(最終更新|Last updated)/.test(block)) continue;
     if (block.startsWith("### ")) {
       html.push(`<${headingTag}>${inline(block.slice(4))}</${headingTag}>`);
     } else if (block.startsWith("- ")) {
