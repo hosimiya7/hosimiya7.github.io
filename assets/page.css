@@ -129,7 +129,7 @@ a.scene b::after{content:" →";color:var(--amber)}
 footer{border-top:1px solid var(--line);max-width:1440px;margin:auto;padding:42px var(--side) 32px;display:grid;grid-template-columns:1fr auto;gap:18px 30px;align-items:start}
 .footer-brand{grid-row:1/3}.footer-links{justify-content:flex-end}.copyright{grid-column:1/-1;margin-top:8px}
 .footer-brand .brand-wordmark{width:130px}
-.footer-links{display:flex;flex-wrap:wrap;gap:12px 24px;color:var(--muted);font-size:12px}.footer-links a:hover{color:var(--glow)}
+.footer-links{display:flex;flex-wrap:wrap;gap:12px 24px;color:var(--muted);font-size:12px}.footer-links a:hover,.copyright a:hover{color:var(--glow)}
 .footer-site .footer-links{color:var(--paper)}
 .copyright{color:var(--muted);font-size:12px;letter-spacing:.05em}
 
